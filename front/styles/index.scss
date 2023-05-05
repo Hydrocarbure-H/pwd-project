@@ -1,0 +1,10 @@
+@import "../libraries/_variables";
+@import "../libraries/bootstrap.css";
+@import "../libraries/_bootswatch";
+
+
+body
+{
+    background-color: $black;
+    color: $body-color;
+}
