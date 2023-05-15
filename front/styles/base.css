@@ -1,0 +1,17 @@
+.container {
+    height: calc(100vh - 60px);
+    display: block;
+}
+
+.first-section {
+    margin-top: 60px;
+}
+
+.secondary-color {
+    background-color: #f5f5f5;
+}
+
+.section {
+    display: block;
+    max-height: 100vh;
+}
