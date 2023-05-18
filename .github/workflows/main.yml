@@ -14,10 +14,10 @@ jobs:
     - name: 📂 Deploy file
       uses: wlixcc/SFTP-Deploy-Action@v1.2.4
       with:
-        username: ${{ secrets.ftp_username }}
-        server: ${{ secrets.ftp_server }}
-        port: ${{ secrets.ftp_port }}
+        username: ${{ secrets.FTP_USERNAME }}
+        server: ${{ secrets.FTP_FOLDER }}
+        port: ${{ secrets.FTP_PORT }}
         local_path: './front/*'
-        remote_path: ${{ secrets.ftp_folder }}
+        remote_path: ${{ secrets.FTP_FOLDER }}
         sftp_only: true
-        password: ${{ secrets.ftp_port }}
+        password: ${{ secrets.FTP_PASSWORD }}
