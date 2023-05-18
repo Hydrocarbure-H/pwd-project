@@ -1,20 +1,14 @@
 @import url('base.css');
-root
-{
-    height: fit-content;
 
-}
-
-
-
-
-html
-{
+root {
     height: fit-content;
 }
 
-body
-{
+html {
+    height: fit-content;
+}
+
+body {
     height: 100%;
 }
 
@@ -22,28 +16,22 @@ body
     margin: 5px;
 }
 
-#container
-{
-    padding-top : 75px;
+#container {
+    padding-top: 75px;
     height: fit-content;
 }
 
-
-
-.img-div
-{
-    width : 50%;
+.img-div {
+    width: 50%;
     margin: 0 auto;
 }
 
-.buy-div
-{
-    width : 50%;
+.buy-div {
+    width: fit-content;
     margin: 20px auto;
 }
 
-.img-product
-{
+.img-product {
     max-width: 90%;
     margin: auto 0;
 }
