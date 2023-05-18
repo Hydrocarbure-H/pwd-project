@@ -18,7 +18,7 @@ body {
 .section {
     display: block;
     overflow-anchor: none;
-    max-height: 100vh;
+    height: fit-content;
 }
 
 .footer {

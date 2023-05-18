@@ -1,4 +1,22 @@
 @import url('base.css');
+root
+{
+    height: fit-content;
+
+}
+
+
+
+
+html
+{
+    height: fit-content;
+}
+
+body
+{
+    height: 100%;
+}
 
 .card {
     margin: 5px;
@@ -9,6 +27,8 @@
     padding-top : 75px;
     height: fit-content;
 }
+
+
 
 .img-div
 {
