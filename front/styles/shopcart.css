@@ -33,3 +33,8 @@ body {
     max-width: 90%;
     margin: auto 0;
 }
+
+.validate-div {
+    width: fit-content;
+    margin: 20px auto;
+}
