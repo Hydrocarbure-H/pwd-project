@@ -1,1 +1,11 @@
 @import url('base.css');
+
+.card {
+    margin: 5px;
+}
+
+#container
+{
+    padding-top : 75px;
+    height: fit-content;
+}
