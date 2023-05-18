@@ -1,0 +1,22 @@
+.profile
+{
+    padding-top: 20px;
+    padding-left: 5px;
+    
+}
+.container-color
+{
+    height: 1000px;
+    background-color: rgb(6, 6, 53);
+}
+.container-main
+{
+    width: 650px; height: 250px;
+    margin: auto;
+    position: relative;
+    background-color: white;
+    background-image: src("../assets/images/baniere-exemple.webp");
+    background-size: cover;
+    border-radius: 5px;
+    overflow: hidden;
+}
