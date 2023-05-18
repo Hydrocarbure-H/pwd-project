@@ -39,50 +39,185 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="stylesheet" href="../libraries/bootstrap.min.css">
-    <link rel="stylesheet/less" href="../styles/index.scss" />
-    <link rel="stylesheet/less" href="../libraries/_bootswatch.scss" />
-    <link rel="stylesheet/less" href="../libraries/_variables.scss" />
+    <link rel="stylesheet" href="../styles/index.css"/>
+    <link rel="stylesheet/less" href="../libraries/_bootswatch.scss"/>
+    <link rel="stylesheet/less" href="../libraries/_variables.scss"/>
     <script src="../libraries/bootstrap.min.bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script type="module" src="../scripts/ui-base.js"></script>
+    <script type="module" src="../scripts/pages/index.js"></script>
 
 </head>
 <body>
+<div class="container" id="container">
+    <div class="h-100 d-flex align-items-center justify-content-center first-section section">
+        <div class="d-block">
+            <h1>Présentation</h1>
+            <h3>
+                Kiventout
+                <small class="text-muted"> - Achetez tout chez nous</small>
+            </h3>
+            <p class="lead">Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+            <div class="col text-center">
+                <button type="button" class="btn btn-primary d-none d-lg-block d-print-block"
+                        onclick="window.location.href = '#flash'">Voir nos ventes
+                    flash
+                </button>
+                <button type="button" class="btn btn-primary d-block d-lg-none d-print-none"
+                        onclick="window.location.href = '#contact'">Nous contacter
+                </button>
+            </div>
+        </div>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">Efrei Marketplace</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarColor01">
-            <ul class="navbar-nav me-auto">
-                <li class="nav-item">
-                    <a class="nav-link active" href="#">Accueil
-                        <span class="visually-hidden">(current)</span>
-                    </a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Nos produits</a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Catégorie 1</a>
-                        <a class="dropdown-item" href="#">Catégorie 2</a>
-                        <a class="dropdown-item" href="#">Catégorie 3</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Tout afficher</a>
+    </div>
+    <div class="h-100 d-flex align-items-center justify-content-center section d-none d-lg-flex d-print-flex"
+         id="flash">
+        <div class="d-block">
+            <div class="d-block">
+                <div class="d-lg-flex d-print-block">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Produit Flash</h4>
+                            <h6 class="card-subtitle mb-2 text-muted">Catégorie</h6>
+                            <p class="card-text">Some quick example text to build on the Produit Flash and make up the
+                                bulk
+                                of
+                                the
+                                card's content.</p>
+                            <a href="#" class="card-link">Détails</a>
+                            <a href="#" class="card-link">Vendeur</a>
+                        </div>
                     </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Notifications</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Panier</a>
-                </li>
-            </ul>
-            <form class="d-flex">
-                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Mon compte</button>
-            </form>
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Produit Flash</h4>
+                            <h6 class="card-subtitle mb-2 text-muted">Catégorie</h6>
+                            <p class="card-text">Some quick example text to build on the Produit Flash and make up the
+                                bulk
+                                of
+                                the
+                                card's content.</p>
+                            <a href="#" class="card-link">Détails</a>
+                            <a href="#" class="card-link">Vendeur</a>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Produit Flash</h4>
+                            <h6 class="card-subtitle mb-2 text-muted">Catégorie</h6>
+                            <p class="card-text">Some quick example text to build on the Produit Flash and make up the
+                                bulk
+                                of
+                                the
+                                card's content.</p>
+                            <a href="#" class="card-link">Détails</a>
+                            <a href="#" class="card-link">Vendeur</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-block">
+                <div class="d-lg-flex d-print-block">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Produit Flash</h4>
+                            <h6 class="card-subtitle mb-2 text-muted">Catégorie</h6>
+                            <p class="card-text">Some quick example text to build on the Produit Flash and make up the
+                                bulk
+                                of
+                                the
+                                card's content.</p>
+                            <a href="#" class="card-link">Détails</a>
+                            <a href="#" class="card-link">Vendeur</a>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Produit Flash</h4>
+                            <h6 class="card-subtitle mb-2 text-muted">Catégorie</h6>
+                            <p class="card-text">Some quick example text to build on the Produit Flash and make up the
+                                bulk
+                                of
+                                the
+                                card's content.</p>
+                            <a href="#" class="card-link">Détails</a>
+                            <a href="#" class="card-link">Vendeur</a>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Produit Flash</h4>
+                            <h6 class="card-subtitle mb-2 text-muted">Catégorie</h6>
+                            <p class="card-text">Some quick example text to build on the Produit Flash and make up the
+                                bulk
+                                of
+                                the
+                                card's content.</p>
+                            <a href="#" class="card-link">Détails</a>
+                            <a href="#" class="card-link">Vendeur</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-block">
+                <div class="d-lg-flex d-print-block">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Produit Flash</h4>
+                            <h6 class="card-subtitle mb-2 text-muted">Catégorie</h6>
+                            <p class="card-text">Some quick example text to build on the Produit Flash and make up the
+                                bulk
+                                of
+                                the
+                                card's content.</p>
+                            <a href="#" class="card-link">Détails</a>
+                            <a href="#" class="card-link">Vendeur</a>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Produit Flash</h4>
+                            <h6 class="card-subtitle mb-2 text-muted">Catégorie</h6>
+                            <p class="card-text">Some quick example text to build on the Produit Flash and make up the
+                                bulk
+                                of
+                                the
+                                card's content.</p>
+                            <a href="#" class="card-link">Détails</a>
+                            <a href="#" class="card-link">Vendeur</a>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Produit Flash</h4>
+                            <h6 class="card-subtitle mb-2 text-muted">Catégorie</h6>
+                            <p class="card-text">Some quick example text to build on the Produit Flash and make up the
+                                bulk
+                                of
+                                the
+                                card's content.</p>
+                            <a href="#" class="card-link">Détails</a>
+                            <a href="#" class="card-link">Vendeur</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</nav>
-
+    <div class="h-100 d-flex align-items-center justify-content-center first-section section"
+         id="contact">
+        <div class="d-block">
+            <h1>Nous contacter</h1>
+            <h3>
+                Kiventout
+                <small class="text-muted"> - Achetez tout chez nous</small>
+            </h3>
+            <p class="lead">Un problème ? Un article défectueux ? Contactez nous par mail à <a
+                    href="mailto:thomas.peugnet@efrei.net">cette addresse</a> !</p>
+            <p class="lead">Vous pouvez retrouver notre centre d'informations au 30-32 Avenue de la
+                République, 94800 Villejuif.</p>
+        </div>
+    </div>
+</div>
 </body>
 </html>
