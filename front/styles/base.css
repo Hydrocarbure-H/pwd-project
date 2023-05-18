@@ -19,6 +19,7 @@ body {
     display: block;
     overflow-anchor: none;
     height: fit-content;
+    min-height: calc(100vh - 60px);
 }
 
 .footer {
@@ -33,12 +34,15 @@ body {
     padding: 0;
 }
 
+.badge {
+    margin-left: 5px;
+}
+
 /* media 785px */
 @media (max-width: 785px) {
 
-    .footer
-    {
-        display:none;
+    .footer {
+        display: none;
     }
 
 }
