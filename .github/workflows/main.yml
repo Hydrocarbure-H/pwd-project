@@ -11,10 +11,13 @@ jobs:
     - name: 🚚 Get latest code
       uses: actions/checkout@v3
 
-    - name: 📂 Sync files
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+    - name: 📂 Deploy file
+      uses: wlixcc/SFTP-Deploy-Action@v1.2.4
       with:
-        server: ${{ secrets.ftp_server }}
         username: ${{ secrets.ftp_username }}
-        password: ${{ secrets.ftp_password }}
-        local-dir: thomas
+        server: ${{ secrets.ftp_server }}
+        port: ${{ secrets.ftp_port }}
+        local_path: './front/*'
+        remote_path: ${{ secrets.ftp_folder }}
+        sftp_only: true
+        password: ${{ secrets.ftp_port }}
