@@ -38,6 +38,11 @@ body {
     margin-left: 5px;
 }
 
+.card {
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, .2);
+    border: none;
+}
+
 /* media 785px */
 @media (max-width: 785px) {
 

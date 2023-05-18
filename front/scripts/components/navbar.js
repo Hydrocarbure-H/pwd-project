@@ -92,7 +92,7 @@ export default function create_navbar()
     // add <span class="badge bg-light">Light</span> to a_navbar_nav_cart
     a_navbar_nav_cart.appendChild(document.createElement("span"));
     a_navbar_nav_cart.lastChild.classList.add("badge", "bg-light");
-    a_navbar_nav_cart.lastChild.innerHTML = "0";
+    a_navbar_nav_cart.lastChild.innerHTML = "3";
     li_navbar_nav_cart.appendChild(a_navbar_nav_cart);
     ul_navbar_nav.appendChild(li_navbar_nav_cart);
     div_collapse_navbar.appendChild(ul_navbar_nav);
