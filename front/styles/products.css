@@ -9,3 +9,21 @@
     padding-top : 75px;
     height: fit-content;
 }
+
+.img-div
+{
+    width : 50%;
+    margin: 0 auto;
+}
+
+.buy-div
+{
+    width : 50%;
+    margin: 20px auto;
+}
+
+.img-product
+{
+    max-width: 90%;
+    margin: auto 0;
+}
