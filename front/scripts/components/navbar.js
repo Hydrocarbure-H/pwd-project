@@ -7,7 +7,7 @@ export default function create_navbar()
     container_fluid.classList.add("container-fluid");
     let a_navbar_brand = document.createElement("a");
     a_navbar_brand.classList.add("navbar-brand");
-    a_navbar_brand.setAttribute("href", "#");
+    a_navbar_brand.setAttribute("href", "../../pages/index.html");
     a_navbar_brand.innerHTML = "Efrei Marketplace";
     let button_navbar_toggler = document.createElement("button");
     button_navbar_toggler.classList.add("navbar-toggler");
@@ -29,7 +29,7 @@ export default function create_navbar()
     li_navbar_nav_home.classList.add("nav-item");
     let a_navbar_nav_home = document.createElement("a");
     a_navbar_nav_home.classList.add("nav-link", "active");
-    a_navbar_nav_home.setAttribute("href", "#");
+    a_navbar_nav_home.setAttribute("href", "../pages/index.html");
     a_navbar_nav_home.innerHTML = "Accueil";
     let span_navbar_nav_home = document.createElement("span");
     span_navbar_nav_home.classList.add("visually-hidden");
@@ -65,7 +65,7 @@ export default function create_navbar()
     div_navbar_nav_dropdown_divider.classList.add("dropdown-divider");
     let a_navbar_nav_dropdown_all = document.createElement("a");
     a_navbar_nav_dropdown_all.classList.add("dropdown-item");
-    a_navbar_nav_dropdown_all.setAttribute("href", "#");
+    a_navbar_nav_dropdown_all.setAttribute("href", "../pages/products.html");
     a_navbar_nav_dropdown_all.innerHTML = "Tout afficher";
     div_navbar_nav_dropdown.appendChild(a_navbar_nav_dropdown_1);
     div_navbar_nav_dropdown.appendChild(a_navbar_nav_dropdown_2);
@@ -94,6 +94,7 @@ export default function create_navbar()
     div_collapse_navbar.appendChild(ul_navbar_nav);
     let form_navbar_nav = document.createElement("form");
     form_navbar_nav.classList.add("d-flex");
+    form_navbar_nav.setAttribute("action", "../pages/login.html");
     let button_navbar_nav_account = document.createElement("button");
     button_navbar_nav_account.classList.add("btn", "btn-secondary", "my-2", "my-sm-0");
     button_navbar_nav_account.setAttribute("type", "submit");
