@@ -14,8 +14,7 @@ function display_response($type, $message, $code): void
         "type" => $type,
         "message" => $message
     );
-    echo "<pre>";
     echo json_encode($response, JSON_PRETTY_PRINT);
-    echo "</pre>";
+    header('Content-Type: application/json; charset=utf-8');
     die();
 }

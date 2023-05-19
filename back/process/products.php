@@ -86,7 +86,7 @@ function vendor($db): void
  * @param $db
  * @return void
  */
-function product($db)
+function product($db): void
 {
     if (isset($_GET['id']))
     {
@@ -116,7 +116,7 @@ function product($db)
  * @param $db
  * @return void
  */
-function flash($db)
+function flash($db): void
 {
     $query = $db->prepare('SELECT * FROM products WHERE flash_sale = 1');
     $query->execute();
