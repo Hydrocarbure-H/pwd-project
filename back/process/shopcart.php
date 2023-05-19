@@ -61,7 +61,11 @@ function add($db): void
     }
 }
 
-
+/**
+ * Remove a product from shopcart
+ * @param $db
+ * @return void
+ */
 function remove($db): void
 {
     if (isset($_POST['token']) && $_POST['token'] != "")
@@ -118,6 +122,11 @@ function remove($db): void
     }
 }
 
+/**
+ * Validate the shopping cart - TODO
+ * @param $db
+ * @return void
+ */
 function validate($db): void
 {
     if (isset($_POST['token']) && $_POST['token'] != "")
@@ -143,6 +152,89 @@ function validate($db): void
             display_response("error", "User not found. Please reconnect", 404);
         }
         // TO DO : Buy the shopping cart following instructions in project description
+    }
+    else
+    {
+        display_response("error", "Token missing. Please reconnect.", 403);
+    }
+}
+
+/**
+ * Get all products in shopcart
+ * @param $db
+ * @return void
+ */
+function get($db): void
+{
+    if (isset($_POST['token']) && $_POST['token'] != "")
+    {
+        $token = $_POST['token'];
+        $query = null;
+        try
+        {
+            $query = $db->prepare('SELECT * FROM users WHERE token = :token');
+            $query->execute([
+                'token' => $token
+            ]);
+        }
+        catch (PDOException $e)
+        {
+            display_response("error", $e->getMessage(), 500);
+        }
+
+        $user = $query->fetch(PDO::FETCH_ASSOC);
+        if (!$user)
+        {
+            unset($user['password']);
+            display_response("error", "User not found. Please reconnect", 404);
+        }
+
+        // Get all products from shopcart table
+        $query = null;
+        try
+        {
+            $query = $db->prepare('SELECT * FROM shopcart WHERE user_id = :user_id');
+            $query->execute([
+                'user_id' => $user['id']
+            ]);
+        }
+        catch (PDOException $e)
+        {
+            display_response("error", $e->getMessage(), 500);
+        }
+
+        $shopcart = $query->fetchAll(PDO::FETCH_ASSOC);
+        if (!$shopcart)
+        {
+            display_response("error", "Shopcart empty.", 404);
+        }
+
+        $products = [];
+        foreach ($shopcart as $item)
+        {
+            $query = null;
+            try
+            {
+                $query = $db->prepare('SELECT * FROM products WHERE id = :id');
+                $query->execute([
+                    'id' => $item['product_id']
+                ]);
+            }
+            catch (PDOException $e)
+            {
+                display_response("error", $e->getMessage(), 500);
+            }
+
+            $product = $query->fetch(PDO::FETCH_ASSOC);
+            if (!$product)
+            {
+                display_response("error", "Product not found.", 404);
+            }
+
+            array_push($products, $product);
+        }
+
+        display_response("success", $products, 200);
     }
     else
     {
