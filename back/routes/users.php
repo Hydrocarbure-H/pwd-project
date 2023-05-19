@@ -45,6 +45,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
                     display_response("error", $e->getMessage(), 500);
                 }
                 break;
+            case 'profile':
+                try
+                {
+                    profile($db);
+                }
+                catch (Exception $e)
+                {
+                    display_response("error", $e->getMessage(), 500);
+                }
+                break;
             default:
                 display_response("error", "Unknown request.", 403);
                 break;

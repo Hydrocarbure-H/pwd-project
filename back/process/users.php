@@ -123,3 +123,38 @@ function register($db): void
         display_response("error", "Missing parameters.", 403);
     }
 }
+
+function profile($db): void
+{
+    if (isset($_POST['token']) && $_POST['token'] != "")
+    {
+        $token = $_POST['token'];
+        $query = null;
+        try
+        {
+            $query = $db->prepare('SELECT * FROM users WHERE token = :token');
+            $query->execute([
+                'token' => $token
+            ]);
+        }
+        catch (PDOException $e)
+        {
+            display_response("error", $e->getMessage(), 500);
+        }
+
+        $user = $query->fetch(PDO::FETCH_ASSOC);
+        if ($user)
+        {
+            unset($user['password']);
+            display_response("success", $user, 200);
+        }
+        else
+        {
+            display_response("error", "User not found.", 404);
+        }
+    }
+    else
+    {
+        display_response("error", "Token missing. Please reconnect.", 403);
+    }
+}
