@@ -24,7 +24,7 @@ function construct($db): void
         // create table users
         $db->exec('CREATE TABLE IF NOT EXISTS users (
             id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-            email VARCHAR(255) DEFAULT NULL,
+            email VARCHAR(255) DEFAULT NULL UNIQUE,
             password VARCHAR(255) DEFAULT NULL,
             firstname VARCHAR(255) DEFAULT NULL,
             token VARCHAR(100) DEFAULT NULL,
@@ -44,7 +44,7 @@ function construct($db): void
         // Create table categories
         $db->exec('CREATE TABLE IF NOT EXISTS categories (
             id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-            name VARCHAR(255) NOT NULL,
+            name VARCHAR(255) NOT NULL UNIQUE,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )');
 
@@ -60,7 +60,7 @@ function construct($db): void
             FOREIGN KEY (category_id) REFERENCES categories(id),
             FOREIGN KEY (vendor_id) REFERENCES users(id),
             id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-            name VARCHAR(255) NOT NULL,
+            name VARCHAR(255) NOT NULL UNIQUE,
             category_id INT UNSIGNED,
             price FLOAT NOT NULL,
             description TEXT NOT NULL,

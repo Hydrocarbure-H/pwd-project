@@ -62,7 +62,7 @@ function add($db): void
 }
 
 
-function remove($db)
+function remove($db): void
 {
     if (isset($_POST['token']) && $_POST['token'] != "")
     {
@@ -118,7 +118,7 @@ function remove($db)
     }
 }
 
-function validate($db)
+function validate($db): void
 {
     if (isset($_POST['token']) && $_POST['token'] != "")
     {

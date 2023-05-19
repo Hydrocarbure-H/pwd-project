@@ -4,6 +4,23 @@
  */
 function fill($db): void
 {
+    // Check if the DB is already filled
+    try
+    {
+        $query = $db->prepare('SELECT * FROM users');
+        $query->execute();
+        $users = $query->fetchAll(PDO::FETCH_ASSOC);
+        if (count($users) > 0)
+        {
+            display_response("success", "Database already filled.", 200);
+        }
+    }
+    catch (PDOException $e)
+    {
+        display_response("error", $e->getMessage(), 500);
+    }
+
+
     // Open the file in read mode db.json
     $file = fopen("../db/db.json", "r");
     // Read the file and store the content in a variable
@@ -12,7 +29,7 @@ function fill($db): void
     fclose($file);
     // Decode the JSON content
     $json = json_decode($content, true);
-    
+
     // Loop over the previous json to insert data in the database
     foreach ($json['data']['users'] as $user)
     {
