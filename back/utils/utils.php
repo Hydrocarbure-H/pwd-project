@@ -17,6 +17,5 @@ function display_response($type, $message, $code): void
     echo "<pre>";
     echo json_encode($response, JSON_PRETTY_PRINT);
     echo "</pre>";
-    header("HTTP/1.1 " . $code . " " . $message);
     die();
 }
