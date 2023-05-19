@@ -1,2 +1,5 @@
-*.idea*
+*idea*
+./back/constants.php
+/back/constants.php
+back/db/db.json
 *DS_Store*
