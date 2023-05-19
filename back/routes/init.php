@@ -3,10 +3,11 @@
 include "../utils/utils.php";
 include "../db/connect.php";
 include "../db/construct.php";
+include "../db/fill.php";
 
 include "../constants.php";
 
-display_errors(false);
+display_errors(true);
 
 if (isset($DB_PASS) && isset($DB_USER) && isset($DB_HOST))
 {
@@ -16,6 +17,7 @@ if (isset($DB_PASS) && isset($DB_USER) && isset($DB_HOST))
 if (isset($db))
 {
     construct($db);
+    fill($db);
     display_response("success", "Database initialized", 200);
 }
 else
