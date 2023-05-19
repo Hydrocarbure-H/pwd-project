@@ -66,3 +66,60 @@ function login($db): void
         display_response("error", "Email or password missing.", 403);
     }
 }
+
+/**
+ * Register a user
+ * @param $db
+ * @return void
+ */
+function register($db): void
+{
+    if (isset($_POST['email']) && isset($_POST['password']) && isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST["account_type"]))
+    {
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $firstname = $_POST['firstname'];
+        $lastname = $_POST['lastname'];
+        $account_type = $_POST['account_type'];
+        // Check if user already exists
+        $query = null;
+        try
+        {
+            $query = $db->prepare('SELECT * FROM users WHERE email = :email');
+            $query->execute([
+                'email' => $email
+            ]);
+        }
+        catch (PDOException $e)
+        {
+            display_response("error", $e->getMessage(), 500);
+        }
+
+        if ($query->fetch(PDO::FETCH_ASSOC))
+        {
+            display_response("error", "User already exists.", 403);
+        }
+
+        // Insert user
+        try
+        {
+            $query = $db->prepare('INSERT INTO users(email, password, firstname, lastname, account_type) VALUES (:email, :password, :firstname, :lastname, :account_type)');
+            $query->execute([
+                'email' => $email,
+                'password' => $password,
+                'firstname' => $firstname,
+                'lastname' => $lastname,
+                'account_type' => $account_type
+            ]);
+        }
+        catch (PDOException $e)
+        {
+            display_response("error", $e->getMessage(), 500);
+        }
+        display_response("success", "User registered.", 200);
+    }
+    else
+    {
+        display_response("error", "Missing parameters.", 403);
+    }
+}
