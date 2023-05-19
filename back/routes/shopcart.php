@@ -3,7 +3,7 @@
 include_once "../utils/utils.php";
 include_once "../db/connect.php";
 include_once "../constants.php";
-include_once "../process/users.php";
+include_once "../process/shopcart.php";
 
 $db = null;
 if (isset($DB_PASS) && isset($DB_USER) && isset($DB_HOST) && isset($DB_NAME))
@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         switch ($_POST['query'])
         {
             // Get all products
-            case 'login':
+            case 'add':
                 try
                 {
                     login($db);
@@ -35,30 +35,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
                     display_response("error", $e->getMessage(), 500);
                 }
                 break;
-            case 'register':
+            case 'remove':
                 try
                 {
-                    register($db);
+                    remove($db);
                 }
                 catch (Exception $e)
                 {
                     display_response("error", $e->getMessage(), 500);
                 }
                 break;
-            case 'profile':
+            case 'validate':
                 try
                 {
-                    profile($db);
-                }
-                catch (Exception $e)
-                {
-                    display_response("error", $e->getMessage(), 500);
-                }
-                break;
-            case 'logout':
-                try
-                {
-                    logout($db);
+                    validate($db);
                 }
                 catch (Exception $e)
                 {

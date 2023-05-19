@@ -158,3 +158,32 @@ function profile($db): void
         display_response("error", "Token missing. Please reconnect.", 403);
     }
 }
+
+/**
+ * Logout a user
+ * @param $db
+ * @return void
+ */
+function logout($db): void
+{
+    if (isset($_POST['token']) && $_POST['token'] != "")
+    {
+        $token = $_POST['token'];
+        try
+        {
+            $query = $db->prepare('UPDATE users SET token = NULL WHERE token = :token');
+            $query->execute([
+                'token' => $token
+            ]);
+        }
+        catch (PDOException $e)
+        {
+            display_response("error", $e->getMessage(), 500);
+        }
+        display_response("success", "User disconnected.", 200);
+    }
+    else
+    {
+        display_response("error", "Token missing. Please reconnect.", 403);
+    }
+}
