@@ -27,6 +27,7 @@ function construct($db): void
             email VARCHAR(255) DEFAULT NULL,
             password VARCHAR(255) DEFAULT NULL,
             firstname VARCHAR(255) DEFAULT NULL,
+            token VARCHAR(100) DEFAULT NULL,
             lastname VARCHAR(255) DEFAULT NULL,
             address VARCHAR(255) DEFAULT NULL,
             account_type VARCHAR(255) DEFAULT NULL,
