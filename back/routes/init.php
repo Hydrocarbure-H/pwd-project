@@ -9,9 +9,9 @@ include "../constants.php";
 
 display_errors(true);
 
-if (isset($DB_PASS) && isset($DB_USER) && isset($DB_HOST))
+if (isset($DB_PASS) && isset($DB_USER) && isset($DB_HOST) && isset($DB_NAME))
 {
-    $db = connect($DB_HOST, $DB_USER, $DB_PASS);
+    $db = connect($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME);
 }
 
 if (isset($db))
