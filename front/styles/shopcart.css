@@ -1,0 +1,40 @@
+@import url('base.css');
+
+root {
+    height: fit-content;
+}
+
+html {
+    height: fit-content;
+}
+
+body {
+    height: 100%;
+}
+
+
+#container {
+    padding-top: 75px;
+    height: fit-content;
+    min-height: calc(100vh - 60px);
+}
+
+.img-div {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.buy-div {
+    width: fit-content;
+    margin: 20px auto;
+}
+
+.img-product {
+    max-width: 90%;
+    margin: auto 0;
+}
+
+.validate-div {
+    width: fit-content;
+    margin: 20px auto;
+}

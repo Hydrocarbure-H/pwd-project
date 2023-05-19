@@ -1,0 +1,21 @@
+@import url('base.css');
+
+
+.form-group {
+    margin: 10px 0;
+}
+
+
+.sub-div {
+    width: fit-content;
+    margin: 20px auto;
+}
+
+h3 {
+    margin-bottom: 50px;
+}
+
+.login-div {
+    border-radius: 5px;
+    padding: 20px;
+}
