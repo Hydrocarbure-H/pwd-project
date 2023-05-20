@@ -36,12 +36,22 @@ function all($db): void
  */
 function category($db): void
 {
-    if (isset($_GET['id']))
+    if (isset($_GET['name']))
     {
-        $id = $_GET['id'];
-        $query = $db->prepare('SELECT * FROM products WHERE category_id = :id');
+        $name = $_GET['name'];
+        $query = $db->prepare('SELECT
+        products.name as name, 
+       categories.name as category, 
+       price, 
+       image, 
+       users.firstname as vendor,
+       description
+        FROM products 
+        INNER JOIN categories ON products.category_id = categories.id 
+        INNER JOIN users ON products.vendor_id = users.id WHERE categories.name = :name ORDER BY products.id ASC'
+        );
         $query->execute([
-            'id' => $id
+            'name' => $name
         ]);
         $products = $query->fetchAll(PDO::FETCH_ASSOC);
         if (count($products) === 0)
