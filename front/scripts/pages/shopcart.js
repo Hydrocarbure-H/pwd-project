@@ -1,4 +1,4 @@
-import {get_request, post_request} from "../utils/requests.js";
+import {post_request} from "../utils/requests.js";
 
 // on ready
 $(document).ready(function ()
@@ -101,10 +101,10 @@ function display_products(response)
             let card_button_div = document.createElement("div");
             card_button_div.classList.add("d-block", "buy-div");
             let card_button = document.createElement("button");
-            card_button.classList.add("btn", "btn-dark");
-            card_button.innerHTML = "Ajouter au panier - " + products[i + k * 3]["price"] + "€";
-            card_button_div.appendChild(card_button);
+            card_button.classList.add("btn", "btn-danger");
+            card_button.innerHTML = "Retirer du panier - " + products[i + k * 3]["price"] + "€";
 
+            card_button_div.appendChild(card_button);
             card_body.appendChild(card_title);
             card_body.appendChild(card_subtitle);
             card_body.appendChild(card_image);
@@ -114,6 +114,6 @@ function display_products(response)
             cards_content.appendChild(card_item);
         }
         cards.appendChild(cards_content);
-        products_div.appendChild(cards);
+        products_div.prepend(cards);
     }
 }
