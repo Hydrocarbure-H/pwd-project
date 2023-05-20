@@ -1,4 +1,5 @@
 import {post_request} from "./requests.js";
+import display_message from "./errors.js";
 
 export function add_product(product_id)
 {
@@ -19,42 +20,11 @@ export function add_product(product_id)
         let json = JSON.parse(this.responseText);
         if (json["type"] === "error")
         {
-            // Display the error
-            let alert = document.createElement("div");
-            alert.classList.add("alert");
-            alert.classList.add("alert-dismissible");
-            alert.classList.add("alert-danger");
-            let button = document.createElement("button");
-            button.classList.add("btn-close");
-            button.setAttribute("data-bs-dismiss", "alert");
-            button.setAttribute("aria-label", "Close");
-            alert.appendChild(button);
-            let strong = document.createElement("strong");
-            strong.innerHTML = "Oh noo... ";
-            let text = document.createTextNode(json["message"] + " Please try again.");
-            alert.appendChild(strong);
-            alert.appendChild(text);
-            document.getElementById("products_content").appendChild(alert);
+            display_message("danger", "Erreur... ", "Impossible d'ajouter le produit à votre panier pour le moment. Error: " + json["message"], "products_content");
         }
         else
         {
-            // Display the error
-            let alert = document.createElement("div");
-            alert.classList.add("alert");
-            alert.classList.add("alert-dismissible");
-            alert.classList.add("alert-success");
-            let button = document.createElement("button");
-            button.classList.add("btn-close");
-            button.setAttribute("data-bs-dismiss", "alert");
-            button.setAttribute("aria-label", "Close");
-            alert.appendChild(button);
-            let strong = document.createElement("strong");
-            strong.innerHTML = "Yep !";
-            let text = document.createTextNode(
-                " The product has been added to your shopcart.");
-            alert.appendChild(strong);
-            alert.appendChild(text);
-            document.getElementById("products_content").prepend(alert);
+            display_message("success", "Produit ajouté ! ", "Le produit a bien été ajouté à votre panier.", "products_content");
         }
     }
 }
@@ -79,21 +49,7 @@ export function remove_product(shopcart_product_id)
         if (json["type"] === "error")
         {
             // Display the error
-            let alert = document.createElement("div");
-            alert.classList.add("alert");
-            alert.classList.add("alert-dismissible");
-            alert.classList.add("alert-danger");
-            let button = document.createElement("button");
-            button.classList.add("btn-close");
-            button.setAttribute("data-bs-dismiss", "alert");
-            button.setAttribute("aria-label", "Close");
-            alert.appendChild(button);
-            let strong = document.createElement("strong");
-            strong.innerHTML = "Oh noo... ";
-            let text = document.createTextNode(json["message"] + " Please try again.");
-            alert.appendChild(strong);
-            alert.appendChild(text);
-            document.getElementById("products_content").appendChild(alert);
+            display_message("danger", "Erreur... ", "Impossible de supprimer le produit de votre panier pour le moment. Error: " + json["message"], "shopcart_content");
         }
         else
         {

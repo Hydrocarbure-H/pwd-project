@@ -1,5 +1,6 @@
 import {post_request} from "../utils/requests.js";
 import display_products from "../utils/products.js";
+import display_message from "../utils/errors.js";
 // on ready
 $(document).ready(function ()
 {
@@ -25,18 +26,13 @@ function get_shopcart()
         let json = JSON.parse(this.responseText);
         if (json["type"] === "error")
         {
-            let alert = document.createElement("div");
-            alert.classList.add("alert", "alert-danger", "alert-secondary");
-            alert.innerHTML = "<button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\"></button><strong>Erreur...</strong> Impossible de récupérer votre panier pour le moment. Error: " + json["message"];
-            document.getElementById("shopcart_content").appendChild(alert);
+            let message = html_sp
+            display_message("danger", "Erreur... ", "Impossible de récupérer votre panier pour le moment. Error: " + json["message"], "shopcart_content");
         }
 
         else if (json["message"] === "Shopcart empty.")
         {
-            let alert = document.createElement("div");
-            alert.classList.add("alert", "alert-dismissible", "alert-secondary");
-            alert.innerHTML = "<button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\"></button><strong>Rien pour le moment...</strong> Votre panier est actuellement vide. Faites profiter la société de consommation en achetant quelques articles !";
-            document.getElementById("shopcart_content").appendChild(alert);
+            display_message("secondary", "Rien pour le moment... ", "Votre panier est actuellement vide. Faites profiter la société de consommation en achetant quelques articles !", "shopcart_content");
         }
         else
         {

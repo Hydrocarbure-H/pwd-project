@@ -1,6 +1,5 @@
-export default function display_message(type, message)
+export default function display_message(type, title, message, div_id = "products_content")
 {
-
     let alert = document.createElement("div");
     alert.classList.add("alert");
     alert.classList.add("alert-dismissible");
@@ -11,9 +10,9 @@ export default function display_message(type, message)
     button.setAttribute("aria-label", "Close");
     alert.appendChild(button);
     let strong = document.createElement("strong");
-    strong.innerHTML = "Oh noo... ";
+    strong.innerHTML = title;
     let text = document.createTextNode(message);
     alert.appendChild(strong);
     alert.appendChild(text);
-    document.getElementById("products_content").appendChild(alert);
+    document.getElementById(div_id).prepend(alert);
 }

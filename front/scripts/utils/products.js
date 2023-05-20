@@ -12,7 +12,7 @@ export default function display_products(json, is_shopcart = false)
         response = json;
         if (response["type"] === "error")
         {
-            display_message("danger", response["message"]);
+            display_message("danger", "Erreur... ", response["message"]);
             return;
         }
 
@@ -24,7 +24,7 @@ export default function display_products(json, is_shopcart = false)
         let response = JSON.parse(json)
         if (response["type"] === "error")
         {
-            display_message("danger", response["message"]);
+            display_message("danger", "Erreur... ", response["message"]);
             return;
         }
 
