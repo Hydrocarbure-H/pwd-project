@@ -69,6 +69,21 @@ function category($db): void
     }
 }
 
+function categories($db): void
+{
+    $query = $db->prepare('SELECT * FROM categories');
+    $query->execute();
+    $categories = $query->fetchAll(PDO::FETCH_ASSOC);
+    if (count($categories) === 0)
+    {
+        display_response("error", "No categories found.", 404);
+    }
+    else
+    {
+        display_response("success", $categories, 200);
+    }
+}
+
 /**
  * Get all products from a specific vendor
  * @param $db

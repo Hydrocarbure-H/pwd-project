@@ -29,6 +29,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET')
             case 'category':
                 category($db);
                 break;
+            // Get all products from a specific category
+            case 'categories':
+                categories($db);
+                break;
             // Get all products from a specific vendor
             case 'vendor':
                 vendor($db);

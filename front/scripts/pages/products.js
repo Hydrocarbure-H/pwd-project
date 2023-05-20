@@ -3,8 +3,6 @@ import {get_request} from "../utils/requests.js";
 // on ready
 $(document).ready(function ()
 {
-    // Get the products
-    // Check the category in url
     let url = new URL(window.location.href);
     let category = url.searchParams.get("category");
     if (!category || category === "all")

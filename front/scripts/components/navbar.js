@@ -1,3 +1,5 @@
+import {get_request} from "../utils/requests.js";
+
 export default function create_navbar()
 {
     // Create the previous navbar
@@ -37,78 +39,81 @@ export default function create_navbar()
     a_navbar_nav_home.appendChild(span_navbar_nav_home);
     li_navbar_nav_home.appendChild(a_navbar_nav_home);
     ul_navbar_nav.appendChild(li_navbar_nav_home);
-    let li_navbar_nav_dropdown = document.createElement("li");
-    li_navbar_nav_dropdown.classList.add("nav-item", "dropdown");
-    let a_navbar_nav_dropdown = document.createElement("a");
-    a_navbar_nav_dropdown.classList.add("nav-link", "dropdown-toggle");
-    a_navbar_nav_dropdown.setAttribute("data-bs-toggle", "dropdown");
-    a_navbar_nav_dropdown.setAttribute("href", "#");
-    a_navbar_nav_dropdown.setAttribute("role", "button");
-    a_navbar_nav_dropdown.setAttribute("aria-haspopup", "true");
-    a_navbar_nav_dropdown.setAttribute("aria-expanded", "false");
-    a_navbar_nav_dropdown.innerHTML = "Nos produits";
-    let div_navbar_nav_dropdown = document.createElement("div");
-    div_navbar_nav_dropdown.classList.add("dropdown-menu");
-    let a_navbar_nav_dropdown_1 = document.createElement("a");
-    a_navbar_nav_dropdown_1.classList.add("dropdown-item");
-    a_navbar_nav_dropdown_1.setAttribute("href", "#");
-    a_navbar_nav_dropdown_1.innerHTML = "Catégorie 1";
-    let a_navbar_nav_dropdown_2 = document.createElement("a");
-    a_navbar_nav_dropdown_2.classList.add("dropdown-item");
-    a_navbar_nav_dropdown_2.setAttribute("href", "#");
-    a_navbar_nav_dropdown_2.innerHTML = "Catégorie 2";
-    let a_navbar_nav_dropdown_3 = document.createElement("a");
-    a_navbar_nav_dropdown_3.classList.add("dropdown-item");
-    a_navbar_nav_dropdown_3.setAttribute("href", "#");
-    a_navbar_nav_dropdown_3.innerHTML = "Catégorie 3";
-    let div_navbar_nav_dropdown_divider = document.createElement("div");
-    div_navbar_nav_dropdown_divider.classList.add("dropdown-divider");
-    let a_navbar_nav_dropdown_all = document.createElement("a");
-    a_navbar_nav_dropdown_all.classList.add("dropdown-item");
-    a_navbar_nav_dropdown_all.setAttribute("href", "../pages/products.html");
-    a_navbar_nav_dropdown_all.innerHTML = "Tout afficher";
-    div_navbar_nav_dropdown.appendChild(a_navbar_nav_dropdown_1);
-    div_navbar_nav_dropdown.appendChild(a_navbar_nav_dropdown_2);
-    div_navbar_nav_dropdown.appendChild(a_navbar_nav_dropdown_3);
-    div_navbar_nav_dropdown.appendChild(div_navbar_nav_dropdown_divider);
-    div_navbar_nav_dropdown.appendChild(a_navbar_nav_dropdown_all);
-    li_navbar_nav_dropdown.appendChild(a_navbar_nav_dropdown);
-    li_navbar_nav_dropdown.appendChild(div_navbar_nav_dropdown);
-    ul_navbar_nav.appendChild(li_navbar_nav_dropdown);
-    let li_navbar_nav_notifications = document.createElement("li");
-    li_navbar_nav_notifications.classList.add("nav-item");
-    let a_navbar_nav_notifications = document.createElement("a");
-    a_navbar_nav_notifications.classList.add("nav-link");
-    a_navbar_nav_notifications.setAttribute("href", "#");
-    a_navbar_nav_notifications.innerHTML = "Notifications";
-    li_navbar_nav_notifications.appendChild(a_navbar_nav_notifications);
-    ul_navbar_nav.appendChild(li_navbar_nav_notifications);
-    let li_navbar_nav_cart = document.createElement("li");
-    li_navbar_nav_cart.classList.add("nav-item");
-    let a_navbar_nav_cart = document.createElement("a");
-    a_navbar_nav_cart.classList.add("nav-link");
-    a_navbar_nav_cart.setAttribute("href", "../pages/shopcart.html");
-    a_navbar_nav_cart.innerHTML = "Panier";
-    // add <span class="badge bg-light">Light</span> to a_navbar_nav_cart
-    a_navbar_nav_cart.appendChild(document.createElement("span"));
-    a_navbar_nav_cart.lastChild.classList.add("badge", "bg-light");
-    a_navbar_nav_cart.lastChild.innerHTML = "3";
-    li_navbar_nav_cart.appendChild(a_navbar_nav_cart);
-    ul_navbar_nav.appendChild(li_navbar_nav_cart);
-    div_collapse_navbar.appendChild(ul_navbar_nav);
-    let form_navbar_nav = document.createElement("form");
-    form_navbar_nav.classList.add("d-flex");
-    form_navbar_nav.setAttribute("action", "../pages/login.html");
-    let button_navbar_nav_account = document.createElement("button");
-    button_navbar_nav_account.classList.add("btn", "btn-secondary", "my-2", "my-sm-0");
-    button_navbar_nav_account.setAttribute("type", "submit");
-    button_navbar_nav_account.innerHTML = "Mon compte";
-    form_navbar_nav.appendChild(button_navbar_nav_account);
-    div_collapse_navbar.appendChild(form_navbar_nav);
-    container_fluid.appendChild(a_navbar_brand);
-    container_fluid.appendChild(button_navbar_toggler);
-    container_fluid.appendChild(div_collapse_navbar);
-    navbar.appendChild(container_fluid);
 
-    return navbar;
+    // Create the dropdown menu with categories
+    get_request("/pwd-project/back/routes/products.php?query=categories").onload = function ()
+    {
+
+        let json = this.responseText;
+        let categories = JSON.parse(json)["message"];
+
+        let li_navbar_nav_dropdown = document.createElement("li");
+        li_navbar_nav_dropdown.classList.add("nav-item", "dropdown");
+        let a_navbar_nav_dropdown = document.createElement("a");
+        a_navbar_nav_dropdown.classList.add("nav-link", "dropdown-toggle");
+        a_navbar_nav_dropdown.setAttribute("data-bs-toggle", "dropdown");
+        a_navbar_nav_dropdown.setAttribute("href", "#");
+        a_navbar_nav_dropdown.setAttribute("role", "button");
+        a_navbar_nav_dropdown.setAttribute("aria-haspopup", "true");
+        a_navbar_nav_dropdown.setAttribute("aria-expanded", "false");
+        a_navbar_nav_dropdown.innerHTML = "Catégories";
+        let div_navbar_nav_dropdown = document.createElement("div");
+        div_navbar_nav_dropdown.classList.add("dropdown-menu");
+        for (let i = 0; i < categories.length; i++)
+        {
+            let a_navbar_nav_dropdown_category = document.createElement("a");
+            a_navbar_nav_dropdown_category.classList.add("dropdown-item");
+            a_navbar_nav_dropdown_category.setAttribute("href", "../pages/products.html?category=" + categories[i]["name"]);
+            a_navbar_nav_dropdown_category.innerHTML = categories[i]["name"].charAt(0).toUpperCase() + categories[i]["name"].slice(1);
+
+            div_navbar_nav_dropdown.appendChild(a_navbar_nav_dropdown_category);
+            li_navbar_nav_dropdown.appendChild(a_navbar_nav_dropdown);
+            li_navbar_nav_dropdown.appendChild(div_navbar_nav_dropdown);
+        }
+        let div_navbar_nav_dropdown_divider = document.createElement("div");
+        div_navbar_nav_dropdown_divider.classList.add("dropdown-divider");
+        let a_navbar_nav_dropdown_all = document.createElement("a");
+        a_navbar_nav_dropdown_all.classList.add("dropdown-item");
+        a_navbar_nav_dropdown_all.setAttribute("href", "../pages/products.html");
+        a_navbar_nav_dropdown_all.innerHTML = "Tout afficher";
+        div_navbar_nav_dropdown.appendChild(div_navbar_nav_dropdown_divider);
+        div_navbar_nav_dropdown.appendChild(a_navbar_nav_dropdown_all);
+        ul_navbar_nav.appendChild(li_navbar_nav_dropdown);
+
+        let li_navbar_nav_notifications = document.createElement("li");
+        li_navbar_nav_notifications.classList.add("nav-item");
+        let a_navbar_nav_notifications = document.createElement("a");
+        a_navbar_nav_notifications.classList.add("nav-link");
+        a_navbar_nav_notifications.setAttribute("href", "#");
+        a_navbar_nav_notifications.innerHTML = "Notifications";
+        li_navbar_nav_notifications.appendChild(a_navbar_nav_notifications);
+        ul_navbar_nav.appendChild(li_navbar_nav_notifications);
+        let li_navbar_nav_cart = document.createElement("li");
+        li_navbar_nav_cart.classList.add("nav-item");
+        let a_navbar_nav_cart = document.createElement("a");
+        a_navbar_nav_cart.classList.add("nav-link");
+        a_navbar_nav_cart.setAttribute("href", "../pages/shopcart.html");
+        a_navbar_nav_cart.innerHTML = "Panier";
+
+        a_navbar_nav_cart.appendChild(document.createElement("span"));
+        a_navbar_nav_cart.lastChild.classList.add("badge", "bg-light");
+        a_navbar_nav_cart.lastChild.innerHTML = "3";
+        li_navbar_nav_cart.appendChild(a_navbar_nav_cart);
+        ul_navbar_nav.appendChild(li_navbar_nav_cart);
+        div_collapse_navbar.appendChild(ul_navbar_nav);
+        let form_navbar_nav = document.createElement("form");
+        form_navbar_nav.classList.add("d-flex");
+        form_navbar_nav.setAttribute("action", "../pages/login.html");
+        let button_navbar_nav_account = document.createElement("button");
+        button_navbar_nav_account.classList.add("btn", "btn-secondary", "my-2", "my-sm-0");
+        button_navbar_nav_account.setAttribute("type", "submit");
+        button_navbar_nav_account.innerHTML = "Mon compte";
+        form_navbar_nav.appendChild(button_navbar_nav_account);
+        div_collapse_navbar.appendChild(form_navbar_nav);
+        container_fluid.appendChild(a_navbar_brand);
+        container_fluid.appendChild(button_navbar_toggler);
+        container_fluid.appendChild(div_collapse_navbar);
+        navbar.appendChild(container_fluid);
+        document.body.appendChild(navbar);
+    }
 }
