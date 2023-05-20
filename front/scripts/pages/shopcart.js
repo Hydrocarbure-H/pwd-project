@@ -108,7 +108,7 @@ function display_products(response)
             card_button_div.classList.add("d-block", "buy-div");
             let card_button = document.createElement("button");
             card_button.classList.add("btn", "btn-danger");
-            card_button.innerHTML = "Retirer du panier - " + products[i + k * 3]["price"] + "€";
+            card_button.innerHTML = "Retirer du panier - " + products[i + k * 3]["price"].toFixed(2) + "€";
 
             card_button_div.appendChild(card_button);
             card_body.appendChild(card_title);
@@ -122,4 +122,23 @@ function display_products(response)
         cards.appendChild(cards_content);
         products_div.append(cards);
     }
+
+    let validate_div = document.createElement("div");
+    validate_div.classList.add("d-block", "validate-div");
+    let validate_button = document.createElement("button");
+    validate_button.classList.add("btn", "btn-success");
+
+    let total = 0;
+    for (let i = 0; i < products.length; i++)
+    {
+        let price = parseFloat(products[i]["price"]);
+        if (isNaN(price))
+        {
+            continue;
+        }
+        total += price;
+    }
+    validate_button.innerHTML = "Valider mon panier - " + total.toFixed(2) + "€";
+    validate_div.appendChild(validate_button);
+    products_div.appendChild(validate_div);
 }

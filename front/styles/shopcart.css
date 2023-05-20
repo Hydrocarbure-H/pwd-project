@@ -40,7 +40,7 @@ body {
 
 .card {
     margin: 10px;
-    min-width: calc(34% - 20px);
+    min-width: calc(33% - 20px);
     max-width: 300px;
     max-height: 350px;
 }
@@ -49,4 +49,12 @@ body {
     max-height: 100px;
     object-fit: contain;
     margin: 10px 0px;
+}
+
+
+/* Media 785px */
+@media (max-width: 785px) {
+    .card {
+        min-width: calc(99% - 20px);
+    }
 }
