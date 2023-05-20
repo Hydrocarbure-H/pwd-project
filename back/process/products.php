@@ -7,7 +7,16 @@
  */
 function all($db): void
 {
-    $query = $db->prepare('SELECT * FROM products');
+    $query = $db->prepare('SELECT products.name as name, 
+       categories.name as category, 
+       price, 
+       image, 
+       users.firstname as vendor,
+       description
+        FROM products 
+        INNER JOIN categories ON products.category_id = categories.id 
+        INNER JOIN users ON products.vendor_id = users.id ORDER BY products.id ASC'
+    );
     $query->execute();
     $products = $query->fetchAll(PDO::FETCH_ASSOC);
     if (count($products) === 0)

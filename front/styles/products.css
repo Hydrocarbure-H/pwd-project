@@ -25,10 +25,23 @@ body {
 
 .buy-div {
     width: fit-content;
-    margin: 20px auto;
+    margin: 10px auto;
 }
 
 .img-product {
     max-width: 90%;
     margin: auto 0;
+}
+
+.card {
+    margin: 10px;
+    min-width: calc(34% - 20px);
+    max-width: 300px;
+    max-height: 350px;
+}
+
+.card-img-top {
+    max-height: 100px;
+    object-fit: contain;
+    margin: 10px 0px;
 }
