@@ -37,7 +37,7 @@ function add($db): void
             $query = null;
             try
             {
-                $query = $db->prepare('INSERT INTO shopcart (user_id, product_id) VALUES (:user_id, :product_id)');
+                $query = $db->prepare('INSERT INTO shopping_cart (user_id, product_id) VALUES (:user_id, :product_id)');
                 $query->execute([
                     'user_id' => $user['id'],
                     'product_id' => $product_id
@@ -98,7 +98,7 @@ function remove($db): void
             $query = null;
             try
             {
-                $query = $db->prepare('DELETE FROM shopcart WHERE user_id = :user_id AND product_id = :product_id');
+                $query = $db->prepare('DELETE FROM shopping_cart WHERE user_id = :user_id AND product_id = :product_id');
                 $query->execute([
                     'user_id' => $user['id'],
                     'product_id' => $product_id
@@ -193,7 +193,7 @@ function get($db): void
         $query = null;
         try
         {
-            $query = $db->prepare('SELECT * FROM shopcart WHERE user_id = :user_id');
+            $query = $db->prepare('SELECT products.name as name, products.price as price, products.image as image, products.description as description, products.id as id, categories.name as category FROM shopping_cart INNER JOIN products ON shopping_cart.product_id = products.id INNER JOIN categories ON products.category_id = categories.id WHERE shopping_cart.user_id = :user_id');
             $query->execute([
                 'user_id' => $user['id']
             ]);
@@ -206,32 +206,20 @@ function get($db): void
         $shopcart = $query->fetchAll(PDO::FETCH_ASSOC);
         if (!$shopcart)
         {
-            display_response("error", "Shopcart empty.", 404);
+            display_response("success", "Shopcart empty.", 200);
         }
 
         $products = [];
-        foreach ($shopcart as $item)
+        foreach ($shopcart as $product)
         {
-            $query = null;
-            try
-            {
-                $query = $db->prepare('SELECT * FROM products WHERE id = :id');
-                $query->execute([
-                    'id' => $item['product_id']
-                ]);
-            }
-            catch (PDOException $e)
-            {
-                display_response("error", $e->getMessage(), 500);
-            }
-
-            $product = $query->fetch(PDO::FETCH_ASSOC);
-            if (!$product)
-            {
-                display_response("error", "Product not found.", 404);
-            }
-
-            array_push($products, $product);
+            $products[] = [
+                'id' => $product['id'],
+                'name' => $product['name'],
+                'price' => $product['price'],
+                'image' => $product['image'],
+                'description' => $product['description'],
+                'category' => $product['category']
+            ];
         }
 
         display_response("success", $products, 200);
