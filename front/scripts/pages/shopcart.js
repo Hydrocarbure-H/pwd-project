@@ -3,6 +3,13 @@ import {post_request} from "../utils/requests.js";
 // on ready
 $(document).ready(function ()
 {
+    // Check if the user is already logged in
+    if (!localStorage.getItem("token") || localStorage.getItem("token") === "undefined")
+    {
+        // Redirect to the home page
+        window.location.href = "../pages/login.html";
+        return;
+    }
     // Get the shopcart
     get_shopcart();
 
@@ -15,7 +22,6 @@ function get_shopcart()
         "token": localStorage.getItem("token")
     })).onload = function ()
     {
-
         let json = JSON.parse(this.responseText);
         if (json["type"] === "error")
         {
@@ -114,6 +120,6 @@ function display_products(response)
             cards_content.appendChild(card_item);
         }
         cards.appendChild(cards_content);
-        products_div.prepend(cards);
+        products_div.append(cards);
     }
 }

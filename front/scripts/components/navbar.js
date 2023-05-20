@@ -1,4 +1,4 @@
-import {get_request} from "../utils/requests.js";
+import {get_request, post_request} from "../utils/requests.js";
 
 export default function create_navbar()
 {
@@ -95,9 +95,6 @@ export default function create_navbar()
         a_navbar_nav_cart.setAttribute("href", "../pages/shopcart.html");
         a_navbar_nav_cart.innerHTML = "Panier";
 
-        a_navbar_nav_cart.appendChild(document.createElement("span"));
-        a_navbar_nav_cart.lastChild.classList.add("badge", "bg-light");
-        a_navbar_nav_cart.lastChild.innerHTML = "3";
         li_navbar_nav_cart.appendChild(a_navbar_nav_cart);
         ul_navbar_nav.appendChild(li_navbar_nav_cart);
         div_collapse_navbar.appendChild(ul_navbar_nav);
