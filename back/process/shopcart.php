@@ -92,15 +92,15 @@ function remove($db): void
         }
 
         // Remove from shopcart table
-        if (isset($_POST['product_id']) && $_POST['product_id'] != "")
+        if (isset($_POST['id']) && $_POST['id'] != "")
         {
-            $product_id = $_POST['product_id'];
+            $product_id = $_POST['id'];
             $query = null;
             try
             {
-                $query = $db->prepare('DELETE FROM shopping_cart WHERE user_id = :user_id AND product_id = :product_id');
+                // Improve : multiple remove if the user has multiple times the same product in his shopcart
+                $query = $db->prepare('DELETE FROM shopping_cart WHERE id = :product_id');
                 $query->execute([
-                    'user_id' => $user['id'],
                     'product_id' => $product_id
                 ]);
             }

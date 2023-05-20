@@ -1,4 +1,5 @@
 import {post_request} from "../utils/requests.js";
+import {remove_product} from "../utils/shopcart.js";
 
 // on ready
 $(document).ready(function ()
@@ -119,6 +120,12 @@ function display_products(response)
             card_body.appendChild(card_button_div);
             card_item.appendChild(card_body);
             cards_content.appendChild(card_item);
+
+            // Add the event listener to the button
+            card_button.addEventListener("click", function ()
+            {
+                remove_product(products[i + k * 3]["id"]);
+            });
         }
         cards.appendChild(cards_content);
         products_div.append(cards);
