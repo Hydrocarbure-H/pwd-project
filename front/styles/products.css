@@ -35,7 +35,7 @@ body {
 
 .card {
     margin: 10px;
-    min-width: calc(34% - 20px);
+    min-width: calc(33% - 30px);
     max-width: 300px;
     max-height: 350px;
 }

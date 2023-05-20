@@ -12,7 +12,8 @@ function all($db): void
        price, 
        image, 
        users.firstname as vendor,
-       description
+       description,
+       products.id as id
         FROM products 
         INNER JOIN categories ON products.category_id = categories.id 
         INNER JOIN users ON products.vendor_id = users.id ORDER BY products.id ASC'
@@ -45,7 +46,8 @@ function category($db): void
        price, 
        image, 
        users.firstname as vendor,
-       description
+       description,
+         products.id as id
         FROM products 
         INNER JOIN categories ON products.category_id = categories.id 
         INNER JOIN users ON products.vendor_id = users.id WHERE categories.name = :name ORDER BY products.id ASC'
@@ -161,7 +163,7 @@ function flash($db): void
     FROM products 
         INNER JOIN categories ON products.category_id = categories.id 
         INNER JOIN users ON products.vendor_id = users.id 
-    WHERE flash_sale = 1');
+    WHERE flash_sale = 1 LIMIT 6');
 
     $query->execute();
     $products = $query->fetchAll(PDO::FETCH_ASSOC);

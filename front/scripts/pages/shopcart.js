@@ -86,6 +86,7 @@ function display_products(response)
                 break;
             }
             let card_item = document.createElement("div");
+            card_item.id = "product_" + products[i + k * 3]["id"];
             card_item.classList.add("card");
             card_item.classList.add("text-black");
             card_item.classList.add("m-3");

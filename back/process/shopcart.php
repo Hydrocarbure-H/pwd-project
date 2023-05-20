@@ -37,7 +37,7 @@ function add($db): void
             $query = null;
             try
             {
-                $query = $db->prepare('INSERT INTO shopping_cart (user_id, product_id) VALUES (:user_id, :product_id)');
+                $query = $db->prepare('INSERT INTO shopping_cart (user_id, product_id, quantity) VALUES (:user_id, :product_id, 1)');
                 $query->execute([
                     'user_id' => $user['id'],
                     'product_id' => $product_id
@@ -193,7 +193,17 @@ function get($db): void
         $query = null;
         try
         {
-            $query = $db->prepare('SELECT products.name as name, products.price as price, products.image as image, products.description as description, products.id as id, categories.name as category FROM shopping_cart INNER JOIN products ON shopping_cart.product_id = products.id INNER JOIN categories ON products.category_id = categories.id WHERE shopping_cart.user_id = :user_id');
+            $query = $db->prepare('SELECT 
+                products.name as name, 
+                products.price as price, 
+                products.image as image, 
+                products.description as description, 
+                categories.name as category,
+                shopping_cart.id as id 
+                FROM shopping_cart 
+                    INNER JOIN products ON shopping_cart.product_id = products.id 
+                    INNER JOIN categories ON products.category_id = categories.id 
+                WHERE shopping_cart.user_id = :user_id');
             $query->execute([
                 'user_id' => $user['id']
             ]);
