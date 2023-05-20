@@ -5,6 +5,7 @@
 
 body {
     overflow-anchor: none;
+    transition: all .3s;
 }
 
 .first-section {
@@ -23,6 +24,7 @@ body {
 }
 
 .footer {
+    transition: all .3s;
     padding: 10px 8px;
     border-radius: 5px;
     margin-top: 50px;
@@ -35,12 +37,17 @@ body {
 }
 
 .badge {
+    transition: all .3s;
     margin-left: 5px;
 }
 
 .card {
     box-shadow: 0 0 5px 0 rgba(0, 0, 0, .2);
     border: none;
+}
+
+a:hover {
+    cursor: pointer;
 }
 
 /* media 785px */

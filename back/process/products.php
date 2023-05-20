@@ -118,7 +118,17 @@ function product($db): void
  */
 function flash($db): void
 {
-    $query = $db->prepare('SELECT * FROM products WHERE flash_sale = 1');
+    $query = $db->prepare('SELECT products.name as name, 
+       categories.name as category, 
+       price, 
+       image, 
+       users.firstname as vendor,
+       description
+    FROM products 
+        INNER JOIN categories ON products.category_id = categories.id 
+        INNER JOIN users ON products.vendor_id = users.id 
+    WHERE flash_sale = 1');
+
     $query->execute();
     $products = $query->fetchAll(PDO::FETCH_ASSOC);
     if (count($products) === 0)

@@ -9,6 +9,8 @@ function display_errors($display = true): void
 
 function display_response($type, $message, $code): void
 {
+    header("Access-Control-Allow-Origin: *");
+    header("Access-Control-Allow-Headers: *");
     $response = array(
         "code" => $code,
         "type" => $type,
