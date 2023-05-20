@@ -11,6 +11,8 @@ function display_response($type, $message, $code): void
 {
     header("Access-Control-Allow-Origin: *");
     header("Access-Control-Allow-Headers: *");
+    header("Access-Control-Allow-Methods: *");
+    http_response_code($code);
     $response = array(
         "code" => $code,
         "type" => $type,

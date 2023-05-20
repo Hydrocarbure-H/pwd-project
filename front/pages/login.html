@@ -45,7 +45,6 @@
     <script src="../libraries/bootstrap.min.bundle.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <script type="module" src="../scripts/ui-base.js"></script>
-    <script type="module" src="../scripts/pages/login.js"></script>
 
 </head>
 <body>
@@ -59,37 +58,29 @@
             </h3>
             <div class="form-group">
                 <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
-                       placeholder="Adresse Email">
+                       placeholder="Adresse Email" required>
             </div>
             <div class="form-group">
-                <input type="password" class="form-control" id="password" placeholder="Mot de passe">
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="optionsRadios" id="buy" value="option1" checked="">
-                <label class="form-check-label" for="buy">
-                    Je suis acheteur
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="optionsRadios" id="sell" value="option2">
-                <label class="form-check-label" for="sell">
-                    Je suis vendeur
-                </label>
+                <input type="password" class="form-control" id="password" placeholder="Mot de passe" required>
             </div>
             <div class="d-block sub-div">
-                <button type="button" class="btn btn-dark" onclick="window.location.href = '../pages/profile.html'">
+                <button type="button" class="btn btn-dark" id="login_button">
                     Connexion
                 </button>
             </div>
             <div class="d-block text-center">
+                <p class="text-danger" id="error"></p>
                 <a href="../pages/register.html">Pas encore inscrit ?</a>
             </div>
             <div class="progress">
                 <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
-                     aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%;"></div>
+                     aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"
+                     id="progress_login"></div>
             </div>
         </div>
     </div>
 </div>
+<script type="module" src="../scripts/pages/login.js"></script>
+
 </body>
 </html>

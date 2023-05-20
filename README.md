@@ -14,3 +14,4 @@ PWD stands for :
 - Improve auth method (currently little bit insecure)
 - Improve Account type by adding a table in the DB
 - Empty shopcart with a button
+- Improve creation of elements in JS
