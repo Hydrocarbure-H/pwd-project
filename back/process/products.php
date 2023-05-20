@@ -159,7 +159,8 @@ function flash($db): void
        price, 
        image, 
        users.firstname as vendor,
-       description
+       description,
+         products.id as id
     FROM products 
         INNER JOIN categories ON products.category_id = categories.id 
         INNER JOIN users ON products.vendor_id = users.id 

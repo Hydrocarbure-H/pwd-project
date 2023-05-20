@@ -2,6 +2,11 @@ import {add_product} from "./shopcart.js";
 import {remove_product} from "./shopcart.js";
 import display_message from "./errors.js";
 
+/**
+ * Display the products
+ * @param json
+ * @param is_shopcart
+ */
 export default function display_products(json, is_shopcart = false)
 {
     let response = null;
@@ -80,7 +85,6 @@ export default function display_products(json, is_shopcart = false)
             }
 
             card_button_div.appendChild(card_button);
-
             card_body.appendChild(card_title);
             card_body.appendChild(card_subtitle);
             card_body.appendChild(card_image);

@@ -1,10 +1,12 @@
 import {post_request} from "./requests.js";
 import display_message from "./errors.js";
 
+/**
+ * Add a product to the shopcart
+ * @param product_id
+ */
 export function add_product(product_id)
 {
-    // add a product to the shopcart by doing a POST request to the API
-    // with the product id and the token
     post_request("/pwd-project/back/routes/shopcart.php", JSON.stringify({
         "query": "add",
         "token": localStorage.getItem("token"),
@@ -29,10 +31,12 @@ export function add_product(product_id)
     }
 }
 
+/**
+ * Remove a product from the shopcart
+ * @param shopcart_product_id
+ */
 export function remove_product(shopcart_product_id)
 {
-    // remove a product from the shopcart by doing a POST request to the API
-    // with the product id and the token
     post_request("/pwd-project/back/routes/shopcart.php", JSON.stringify({
         "query": "remove",
         "token": localStorage.getItem("token"),
@@ -48,12 +52,10 @@ export function remove_product(shopcart_product_id)
         let json = JSON.parse(this.responseText);
         if (json["type"] === "error")
         {
-            // Display the error
             display_message("danger", "Erreur... ", "Impossible de supprimer le produit de votre panier pour le moment. Error: " + json["message"], "shopcart_content");
         }
         else
         {
-            // Display the error
             window.location.reload();
         }
     }
