@@ -15,3 +15,4 @@ PWD stands for :
 - Improve Account type by adding a table in the DB
 - Empty shopcart with a button
 - Improve creation of elements in JS
+- Imrpove login system

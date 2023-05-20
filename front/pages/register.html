@@ -45,7 +45,7 @@
     <script src="../libraries/bootstrap.min.bundle.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <script type="module" src="../scripts/ui-base.js"></script>
-    <script type="module" src="../scripts/pages/login-register.js"></script>
+    <script type="module" src="../scripts/pages/register.js"></script>
 
 </head>
 <body>
@@ -72,22 +72,29 @@
                 <input type="password" class="form-control" id="password" placeholder="Mot de passe">
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="optionsRadios" id="buy" value="option1" checked="">
+                <input class="form-check-input" type="radio" name="status" id="buy" value="buyer" checked="">
                 <label class="form-check-label" for="buy">
                     Je suis acheteur
                 </label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="optionsRadios" id="sell" value="option2">
+                <input class="form-check-input" type="radio" name="status" id="sell" value="vendor">
                 <label class="form-check-label" for="sell">
                     Je suis vendeur
                 </label>
             </div>
             <div class="d-block sub-div">
-                <button type="button" class="btn btn-dark">Inscription</button>
+                <button type="button" class="btn btn-dark" id="register_button">Inscription</button>
             </div>
             <div class="d-block text-center">
+                <p class="text-danger" id="error"></p>
+                <p class="text-success" id="success"></p>
                 <a href="../pages/login.html">Déjà inscrit ?</a>
+            </div>
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                     aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"
+                     id="progress_register"></div>
             </div>
         </div>
 

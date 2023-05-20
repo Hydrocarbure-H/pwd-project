@@ -6,57 +6,56 @@ $(document).ready(function ()
     if (localStorage.getItem("token") && localStorage.getItem("token") !== "undefined")
     {
         // Redirect to the home page
-        window.location.href = "../pages/profile.html";
+        window.location.href = "../../pages/profile.html";
     }
 
-    // Check url for register=succes
-    let url = new URL(window.location.href);
-    let register = url.searchParams.get("register");
-    if (register === "success")
-    {
-        document.getElementById("success").innerHTML = "Account created successfully, you can now login.";
-    }
-
-    document.getElementById("login_button").addEventListener("click", login);
+    document.getElementById("register_button").addEventListener("click", register);
     document.addEventListener("keydown", function (event)
     {
         if (event.key === "Enter")
         {
-            login();
+            register();
         }
     });
 
 });
 
-function login()
+function register()
 {
     // Get email and password
     let email = document.getElementById("email").value;
     let password = document.getElementById("password").value;
+    let firstname = document.getElementById("firstname").value;
+    let lastname = document.getElementById("lastname").value;
 
-    if (email === "" || password === "")
+    // Get radio button checked
+    let account_type = document.querySelector('input[name="status"]:checked').value;
+
+    if (email === "" || password === "" || firstname === "" || lastname === "")
     {
         // Display the error
         document.getElementById("error").innerHTML = "Please fill all the fields.";
         return;
     }
 
-    let progress_bar = document.getElementById("progress_login");
+    let progress_bar = document.getElementById("progress_register");
     progress_bar.style.width = "0%";
     document.getElementById("error").innerHTML = "";
 
-
     // Send the request
     post_request("/pwd-project/back/routes/users.php", JSON.stringify({
-        "query": "login",
+        "query": "register",
         "email": email,
-        "password": password
+        "password": password,
+        "firstname": firstname,
+        "lastname": lastname,
+        "account_type": account_type
     })).onload = function ()
     {
         let json = JSON.parse(this.responseText);
         // increase with of progress bar every .5s progress_login
         let progress_login = 0;
-        let progress_bar = document.getElementById("progress_login");
+        let progress_bar = document.getElementById("progress_register");
         let progress_interval = setInterval(function ()
         {
             progress_login += 10;
@@ -75,7 +74,7 @@ function login()
                 // Save the token
                 localStorage.setItem("token", json["message"]["token"]);
                 // Redirect to the home page
-                window.location.href = "../pages/profile.html";
+                window.location.href = "../pages/login.html?register=success";
             }
             else
             {
@@ -85,9 +84,4 @@ function login()
         }, 1500);
 
     }
-}
-
-function register()
-{
-
 }
