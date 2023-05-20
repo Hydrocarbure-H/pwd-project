@@ -1,3 +1,7 @@
+/**
+ * Création du footer
+ * @returns {HTMLDivElement}
+ */
 export default function create_footer()
 {
     let div_footer = document.createElement("div");

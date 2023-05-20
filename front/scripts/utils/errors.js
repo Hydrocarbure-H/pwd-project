@@ -1,3 +1,10 @@
+/**
+ * Display an error message
+ * @param type
+ * @param title
+ * @param message
+ * @param div_id
+ */
 export default function display_message(type, title, message, div_id = "products_content")
 {
     let alert = document.createElement("div");

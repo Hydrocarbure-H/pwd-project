@@ -1,12 +1,14 @@
-import {get_request, post_request} from "../utils/requests.js";
+import {post_request} from "../utils/requests.js";
 
-// on ready
 $(document).ready(function ()
 {
     // Get profile data
     get_profile();
 });
 
+/**
+ * Get the profile data
+ */
 function get_profile()
 {
     post_request("/pwd-project/back/routes/users.php", JSON.stringify({
@@ -86,6 +88,9 @@ function get_profile()
     }
 }
 
+/**
+ * Logout the user
+ */
 function logout()
 {
     // remove the token

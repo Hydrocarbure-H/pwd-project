@@ -1,6 +1,6 @@
 import {get_request} from "../utils/requests.js";
 import display_products from "../utils/products.js";
-// on ready
+
 $(document).ready(function ()
 {
     let url = new URL(window.location.href);
@@ -17,7 +17,9 @@ $(document).ready(function ()
     }
 });
 
-
+/**
+ * Get all the products
+ */
 function get_all_products()
 {
     get_request("/pwd-project/back/routes/products.php?query=all").onload = function ()
@@ -27,6 +29,10 @@ function get_all_products()
 }
 
 
+/**
+ * Get all the products by category
+ * @param category
+ */
 function get_products_by_category(category)
 {
     get_request("/pwd-project/back/routes/products.php?query=category&name=" + category).onload = function ()

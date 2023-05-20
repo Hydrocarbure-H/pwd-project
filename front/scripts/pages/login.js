@@ -5,7 +5,6 @@ $(document).ready(function ()
     // Check if the user is already logged in
     if (localStorage.getItem("token") && localStorage.getItem("token") !== "undefined")
     {
-        // Redirect to the home page
         window.location.href = "../pages/profile.html";
     }
 
@@ -17,6 +16,7 @@ $(document).ready(function ()
         document.getElementById("success").innerHTML = "Account created successfully, you can now login.";
     }
 
+    // Add event listener to login button
     document.getElementById("login_button").addEventListener("click", login);
     document.addEventListener("keydown", function (event)
     {
@@ -28,15 +28,16 @@ $(document).ready(function ()
 
 });
 
+/**
+ * Login the user
+ */
 function login()
 {
-    // Get email and password
     let email = document.getElementById("email").value;
     let password = document.getElementById("password").value;
 
     if (email === "" || password === "")
     {
-        // Display the error
         document.getElementById("error").innerHTML = "Please fill all the fields.";
         return;
     }
@@ -45,8 +46,6 @@ function login()
     progress_bar.style.width = "0%";
     document.getElementById("error").innerHTML = "";
 
-
-    // Send the request
     post_request("/pwd-project/back/routes/users.php", JSON.stringify({
         "query": "login",
         "email": email,
@@ -54,7 +53,6 @@ function login()
     })).onload = function ()
     {
         let json = JSON.parse(this.responseText);
-        // increase with of progress bar every .5s progress_login
         let progress_login = 0;
         let progress_bar = document.getElementById("progress_login");
         let progress_interval = setInterval(function ()
@@ -66,28 +64,20 @@ function login()
                 clearInterval(progress_interval);
             }
         }, 100);
+
         // wait 1.5s before redirecting
         setTimeout(function ()
         {
-            // Redirect to the home page
             if (json["type"] === "success")
             {
-                // Save the token
                 localStorage.setItem("token", json["message"]["token"]);
-                // Redirect to the home page
                 window.location.href = "../pages/profile.html";
             }
             else
             {
-                // Display the error
                 document.getElementById("error").innerHTML = json["message"];
             }
         }, 1500);
 
     }
-}
-
-function register()
-{
-
 }

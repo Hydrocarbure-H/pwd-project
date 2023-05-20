@@ -1,5 +1,8 @@
 import {get_request, post_request} from "../utils/requests.js";
 
+/**
+ * Create the navbar
+ */
 export default function create_navbar()
 {
     // Create the previous navbar

@@ -1,8 +1,9 @@
 import create_navbar from "./components/navbar.js";
 import create_footer from "./components/footer.js";
 
-// on ready, append the navbar to the body with ajax
-
+/**
+ * On document ready, create the navbar and the footer
+ */
 $(document).ready(function ()
 {
     // Create the navbar

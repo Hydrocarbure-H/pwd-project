@@ -7,6 +7,9 @@ $(document).ready(function ()
     get_flash();
 });
 
+/**
+ * Get the flash products
+ */
 function get_flash()
 {
     get_request("/pwd-project/back/routes/products.php?query=flash").onload = function ()
@@ -18,7 +21,6 @@ function get_flash()
             display_message("danger", "Erreur... ", "Impossible de récupérer les produits flash pour le moment. Error: " + response["message"], "flash_content");
             return;
         }
-
         display_products(json, false)
     }
 }

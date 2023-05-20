@@ -16,5 +16,3 @@ PWD stands for :
 - Empty shopcart with a button
 - Improve creation of elements in JS
 - Imrpove login system
-- Improve functions to add elements in shop cart
-- Improve functions to display errors

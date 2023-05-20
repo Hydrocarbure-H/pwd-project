@@ -1,3 +1,10 @@
+/**
+ * Do a POST request to the API
+ * @param endpoint
+ * @param post_data
+ * @param token
+ * @returns {XMLHttpRequest}
+ */
 export function post_request(endpoint, post_data, token = null)
 {
 
@@ -17,6 +24,12 @@ export function post_request(endpoint, post_data, token = null)
     return xhr;
 }
 
+/**
+ * Do a GET request to the API
+ * @param endpoint
+ * @param token
+ * @returns {XMLHttpRequest}
+ */
 export function get_request(endpoint, token = null)
 {
     const url = "http://localhost:12221" + endpoint;

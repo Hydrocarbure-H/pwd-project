@@ -7,15 +7,17 @@ $(document).ready(function ()
     // Check if the user is already logged in
     if (!localStorage.getItem("token") || localStorage.getItem("token") === "undefined")
     {
-        // Redirect to the home page
         window.location.href = "../pages/login.html";
         return;
     }
-    // Get the shopcart
+
     get_shopcart();
 
 });
 
+/**
+ * Get the shopcart
+ */
 function get_shopcart()
 {
     post_request("/pwd-project/back/routes/shopcart.php", JSON.stringify({
@@ -26,7 +28,6 @@ function get_shopcart()
         let json = JSON.parse(this.responseText);
         if (json["type"] === "error")
         {
-            let message = html_sp
             display_message("danger", "Erreur... ", "Impossible de récupérer votre panier pour le moment. Error: " + json["message"], "shopcart_content");
         }
 
