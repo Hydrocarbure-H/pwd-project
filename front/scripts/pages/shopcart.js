@@ -44,20 +44,53 @@ function get_shopcart()
 
 export default function validate(amount)
 {
-    post_request("/pwd-project/back/routes/shopcart.php", JSON.stringify({
-        "query": "validate",
-        "token": localStorage.getItem("token"),
-        "amount": amount
-    })).onload = function ()
+    // get the progress bar progress_validate
+    let progress_validate = 0;
+    let progress_bar = document.getElementById("progress_validate");
+    let progress_interval = setInterval(function ()
     {
-        let json = JSON.parse(this.responseText);
-        if (json["type"] === "error")
+        progress_validate += 10;
+        progress_bar.style.width = progress_validate + "%";
+        if (progress_validate >= 100)
         {
-            display_message("danger", "Erreur... ", "Impossible de valider votre panier pour le moment. Error: " + json["message"], "shopcart_content");
+            clearInterval(progress_interval);
         }
-        else
+    }, 100);
+
+    // wait 2 seconds
+    setTimeout(function ()
+    {
+
+
+        post_request("/pwd-project/back/routes/shopcart.php", JSON.stringify({
+            "query": "validate",
+            "token": localStorage.getItem("token"),
+            "amount": amount
+        })).onload = function ()
         {
-            display_message("success", "Succès ! ", "Votre panier a été validé avec succès !" + json["message"], "shopcart_content");
+            let json = JSON.parse(this.responseText);
+            if (json["type"] === "error")
+            {
+                display_message("danger", "Erreur... ", "Impossible de valider votre panier pour le moment. Error: " + json["message"], "shopcart_content");
+            }
+            else
+            {
+                display_message("success", "Succès ! ", "Votre panier a été validé avec succès ! " + json["message"] + " - Vous allez être redirigé vers l'accueil dans quelques secondes...", "shopcart_content");
+
+                // Reset the progress bar and fill in every 100ms
+                let progress_validate = 0;
+                let progress_bar = document.getElementById("progress_validate");
+                let progress_interval = setInterval(function ()
+                {
+                    progress_validate += 10;
+                    progress_bar.style.width = progress_validate + "%";
+                    if (progress_validate >= 100)
+                    {
+                        clearInterval(progress_interval);
+                        window.location.href = "../pages/index.html";
+                    }
+                }, 900);
+            }
         }
-    }
+    }, 2000);
 }

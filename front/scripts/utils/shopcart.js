@@ -62,7 +62,10 @@ export function remove_product(shopcart_product_id)
     }
 }
 
-
+/**
+ * Display the shopcart dialog
+ * @param amount
+ */
 export function display_shopcart_dialog(amount)
 {
     let shopcart_content = document.getElementById("shopcart_content");
@@ -130,6 +133,19 @@ export function display_shopcart_dialog(amount)
     button.setAttribute("type", "button");
     button.setAttribute("class", "btn btn-primary");
     button.innerHTML = "Valider le paiement";
+    let progress = document.createElement("div");
+    progress.setAttribute("class", "progress");
+    progress.setAttribute("style", "margin-top: 0.5rem;");
+    let progress_bar = document.createElement("div");
+    progress_bar.setAttribute("class", "progress-bar progress-bar-striped progress-bar-animated");
+    progress_bar.setAttribute("role", "progressbar");
+    progress_bar.setAttribute("aria-valuenow", "75");
+    progress_bar.setAttribute("aria-valuemin", "0");
+    progress_bar.setAttribute("aria-valuemax", "100");
+    progress_bar.setAttribute("style", "width: 0%;");
+    progress_bar.setAttribute("id", "progress_validate");
+    progress.appendChild(progress_bar);
+
     // Add the elements to the DOM
     form_group.appendChild(input);
     form_group.appendChild(small);
@@ -145,6 +161,7 @@ export function display_shopcart_dialog(amount)
     form.appendChild(form_group3);
     form.appendChild(form_group4);
     card_body.appendChild(form);
+    card_body.appendChild(progress);
     card.appendChild(card_header);
     card.appendChild(card_body);
     // Add the event listener
@@ -153,7 +170,5 @@ export function display_shopcart_dialog(amount)
         console.log("submit");
         validate(amount);
     });
-
-    // Add the divs to the shopcart_content
     shopcart_content.appendChild(card);
 }
