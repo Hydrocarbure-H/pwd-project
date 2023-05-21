@@ -1,6 +1,7 @@
 import {add_product} from "./shopcart.js";
 import {remove_product} from "./shopcart.js";
 import display_message from "./errors.js";
+import {display_shopcart_dialog} from "./shopcart.js";
 
 /**
  * Display the products
@@ -128,6 +129,7 @@ export default function display_products(json, is_shopcart = false)
         validate_div.classList.add("d-block", "validate-div");
         let validate_button = document.createElement("button");
         validate_button.classList.add("btn", "btn-success");
+        validate_button.id = "validate_button";
 
         let total = 0;
         for (let i = 0; i < products.length; i++)
@@ -140,6 +142,11 @@ export default function display_products(json, is_shopcart = false)
             total += price;
         }
         validate_button.innerHTML = "Valider mon panier - " + total.toFixed(2) + "€";
+        // add event listener
+        validate_button.addEventListener("click", function ()
+        {
+            display_shopcart_dialog(total.toFixed(2));
+        });
         validate_div.appendChild(validate_button);
         products_div.appendChild(validate_div);
     }

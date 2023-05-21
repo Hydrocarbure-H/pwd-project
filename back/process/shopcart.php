@@ -17,8 +17,7 @@ function add($db): void
             $query->execute([
                 'token' => $token
             ]);
-        }
-        catch (PDOException $e)
+        } catch (PDOException $e)
         {
             display_response("error", $e->getMessage(), 500);
         }
@@ -42,8 +41,7 @@ function add($db): void
                     'user_id' => $user['id'],
                     'product_id' => $product_id
                 ]);
-            }
-            catch (PDOException $e)
+            } catch (PDOException $e)
             {
                 display_response("error", $e->getMessage(), 500);
             }
@@ -78,8 +76,7 @@ function remove($db): void
             $query->execute([
                 'token' => $token
             ]);
-        }
-        catch (PDOException $e)
+        } catch (PDOException $e)
         {
             display_response("error", $e->getMessage(), 500);
         }
@@ -103,8 +100,7 @@ function remove($db): void
                 $query->execute([
                     'product_id' => $product_id
                 ]);
-            }
-            catch (PDOException $e)
+            } catch (PDOException $e)
             {
                 display_response("error", $e->getMessage(), 500);
             }
@@ -139,8 +135,7 @@ function validate($db): void
             $query->execute([
                 'token' => $token
             ]);
-        }
-        catch (PDOException $e)
+        } catch (PDOException $e)
         {
             display_response("error", $e->getMessage(), 500);
         }
@@ -151,7 +146,51 @@ function validate($db): void
             unset($user['password']);
             display_response("error", "User not found. Please reconnect", 404);
         }
-        // TO DO : Buy the shopping cart following instructions in project description
+        // Get the total price of the shopping cart
+        $query = null;
+        try
+        {
+            $query = $db->prepare('SELECT SUM(products.price) as total FROM shopping_cart INNER JOIN products ON shopping_cart.product_id = products.id WHERE shopping_cart.user_id = :user_id');
+            $query->execute([
+                'user_id' => $user['id']
+            ]);
+        } catch (PDOException $e)
+        {
+            display_response("error", $e->getMessage(), 500);
+        }
+        $total = $query->fetch(PDO::FETCH_ASSOC);
+        if (!$total)
+        {
+            display_response("error", "Shopping cart empty.", 404);
+        }
+        // Check the amount the user has sent in post request
+        if (isset($_POST['amount']) && $_POST['amount'] != "")
+        {
+            $amount = $_POST['amount'];
+            if ($amount >= $total['total'])
+            {
+                $query = null;
+                try
+                {
+                    $query = $db->prepare('DELETE FROM shopping_cart WHERE user_id = :user_id');
+                    $query->execute([
+                        'user_id' => $user['id']
+                    ]);
+                } catch (PDOException $e)
+                {
+                    display_response("error", $e->getMessage(), 500);
+                }
+                display_response("success", "Payment accepted.", 200);
+            }
+            else
+            {
+                display_response("error", "Payment refused.", 403);
+            }
+        }
+        else
+        {
+            display_response("error", "Amount missing.", 403);
+        }
     }
     else
     {
@@ -176,8 +215,7 @@ function get($db): void
             $query->execute([
                 'token' => $token
             ]);
-        }
-        catch (PDOException $e)
+        } catch (PDOException $e)
         {
             display_response("error", $e->getMessage(), 500);
         }
@@ -207,8 +245,7 @@ function get($db): void
             $query->execute([
                 'user_id' => $user['id']
             ]);
-        }
-        catch (PDOException $e)
+        } catch (PDOException $e)
         {
             display_response("error", $e->getMessage(), 500);
         }

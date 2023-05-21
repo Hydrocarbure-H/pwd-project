@@ -41,3 +41,23 @@ function get_shopcart()
         }
     }
 }
+
+function validate()
+{
+    post_request("/pwd-project/back/routes/shopcart.php", JSON.stringify({
+        "query": "validate",
+        "token": localStorage.getItem("token"),
+        amount: document.getElementById("amount").value
+    })).onload = function ()
+    {
+        let json = JSON.parse(this.responseText);
+        if (json["type"] === "error")
+        {
+            display_message("danger", "Erreur... ", "Impossible de valider votre panier pour le moment. Error: " + json["message"], "shopcart_content");
+        }
+        else
+        {
+            display_message("success", "Succès ! ", "Votre panier a été validé avec succès !" + json["message"], "shopcart_content");
+        }
+    }
+}
