@@ -11,7 +11,7 @@ display_errors(true);
 
 if (isset($DB_PASS) && isset($DB_USER) && isset($DB_HOST) && isset($DB_NAME))
 {
-    $db = connect($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME);
+    $db = connect_firstime($DB_HOST, $DB_USER, $DB_PASS);
 }
 
 if (isset($db))
