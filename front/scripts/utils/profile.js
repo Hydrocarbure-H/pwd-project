@@ -94,8 +94,232 @@ export default function display_profile(location, response, type = "normal")
         // Add event listener to logout link
         document.getElementById("logout").addEventListener("click", logout);
     }
+
+    display_actions(response);
 }
 
+function display_actions(response)
+{
+    let account_type = JSON.parse(response).message.account_type;
+    if (account_type === "vendor")
+    {
+        /**
+         *             <h3>Actions</h3>
+         *             <ul class="nav nav-tabs" role="tablist">
+         *                 <li class="nav-item" role="presentation">
+         *                     <a class="nav-link active" data-bs-toggle="tab" href="#add" aria-selected="true"
+         *                        role="tab">Ajouter</a>
+         *                 </li>
+         *                 <li class="nav-item" role="presentation">
+         *                     <a class="nav-link" data-bs-toggle="tab" href="#delete" aria-selected="false" role="tab"
+         *                        tabindex="-1">Supprimer</a>
+         *                 </li>
+         *             </ul>
+         * <div id="myTabContent" class="tab-content">
+         *                 <div class="tab-pane fade active show" id="add" role="tabpanel">
+         *                     <h3>Ajouter un produit</h3>
+         *                     <div class="form-group mt-3">
+         *                         <input type="email" class="form-control" id="name" aria-describedby="emailHelp"
+         *                                placeholder="Nom">
+         *                         <small class="form-text text-muted">Nom du produit</small>
+         *                     </div>
+         *                     <div class="form-group">
+         *                         <input type="email" class="form-control" id="category" aria-describedby="emailHelp"
+         *                                placeholder="Enter email">
+         *                         <small class="form-text text-muted">Catégorie du produit</small>
+         *                     </div>
+         *                     <div class="form-group">
+         *                         <input type="number" class="form-control" id="price" aria-describedby="emailHelp"
+         *                                placeholder="Prix">
+         *                         <small class="form-text text-muted">Prix du produit</small>
+         *                     </div>
+         *                     <div class="form-group">
+         *                         <textarea class="form-control" id="description" rows="3">Description...</textarea>
+         *                         <small class="form-text text-muted">Description du produit</small>
+         *                     </div>
+         *                     <div class="form-group">
+         *                         <input type="email" class="form-control" id="image" aria-describedby="emailHelp"
+         *                                placeholder="Url">
+         *                         <small class="form-text text-muted">URL vers l'image du prduit</small>
+         *                     </div>
+         *                     <div class="d-flex justify-content-center">
+         *                         <button type="button" class="btn btn-success" id="add_product">Ajouter</button>
+         *                     </div>
+         *                 </div>
+         *                 <div class="tab-pane fade" id="delete" role="tabpanel">
+         *                     <div class="form-group mt-3">
+         *                         <input type="number" class="form-control" id="product_id" aria-describedby="emailHelp"
+         *                                placeholder="Identifiant">
+         *                         <small class="form-text text-muted">Identifiant du produit dans la base de données</small>
+         *                     </div>
+         *                     <div class="d-flex justify-content-center">
+         *                         <button type="button" class="btn btn-success" id="delete_product">Supprimer</button>
+         *                     </div>
+         *                 </div>
+         *             </div>
+         */
+            // Create the previous divs
+        let actions_div = document.createElement("div");
+        actions_div.classList.add("actions");
+        let actions_header = document.createElement("h3");
+        actions_header.innerHTML = "Actions";
+        let actions_nav = document.createElement("ul");
+        actions_nav.classList.add("nav", "nav-tabs");
+        actions_nav.setAttribute("role", "tablist");
+        let add_nav_item = document.createElement("li");
+        add_nav_item.classList.add("nav-item");
+        add_nav_item.setAttribute("role", "presentation");
+        let add_nav_link = document.createElement("a");
+        add_nav_link.classList.add("nav-link", "active");
+        add_nav_link.setAttribute("data-bs-toggle", "tab");
+        add_nav_link.setAttribute("href", "#add");
+        add_nav_link.setAttribute("aria-selected", "true");
+        add_nav_link.setAttribute("role", "tab");
+        add_nav_link.innerHTML = "Ajouter";
+        add_nav_item.appendChild(add_nav_link);
+        let delete_nav_item = document.createElement("li");
+        delete_nav_item.classList.add("nav-item");
+        delete_nav_item.setAttribute("role", "presentation");
+        let delete_nav_link = document.createElement("a");
+        delete_nav_link.classList.add("nav-link");
+        delete_nav_link.setAttribute("data-bs-toggle", "tab");
+        delete_nav_link.setAttribute("href", "#delete");
+        delete_nav_link.setAttribute("aria-selected", "false");
+        delete_nav_link.setAttribute("role", "tab");
+        delete_nav_link.setAttribute("tabindex", "-1");
+        delete_nav_link.innerHTML = "Supprimer";
+        delete_nav_item.appendChild(delete_nav_link);
+        actions_nav.appendChild(add_nav_item);
+        actions_nav.appendChild(delete_nav_item);
+        actions_div.appendChild(actions_header);
+        actions_div.appendChild(actions_nav);
+
+        // Create the tab content
+        let tab_content = document.createElement("div");
+        tab_content.classList.add("tab-content");
+        tab_content.setAttribute("id", "myTabContent");
+        let add_tab = document.createElement("div");
+        add_tab.classList.add("tab-pane", "fade", "active", "show");
+        add_tab.setAttribute("id", "add");
+        add_tab.setAttribute("role", "tabpanel");
+        // Add product tab
+        let add_tab_header = document.createElement("h3");
+        add_tab_header.innerHTML = "Ajouter un produit";
+        add_tab_header.classList.add("mt-3");
+        let add_tab_form = document.createElement("div");
+        add_tab_form.classList.add("form-group", "mt-3");
+        let add_tab_name = document.createElement("input");
+        add_tab_name.classList.add("form-control");
+        add_tab_name.setAttribute("type", "email");
+        add_tab_name.setAttribute("id", "name");
+        add_tab_name.setAttribute("aria-describedby", "emailHelp");
+        add_tab_name.setAttribute("placeholder", "Nom");
+        let add_tab_name_text = document.createElement("small");
+        add_tab_name_text.classList.add("form-text", "text-muted");
+        add_tab_name_text.innerHTML = "Nom du produit";
+        add_tab_form.appendChild(add_tab_name);
+        add_tab_form.appendChild(add_tab_name_text);
+        let add_tab_category = document.createElement("div");
+        add_tab_category.classList.add("form-group");
+        let add_tab_category_input = document.createElement("input");
+        add_tab_category_input.classList.add("form-control");
+        add_tab_category_input.setAttribute("type", "email");
+        add_tab_category_input.setAttribute("id", "category");
+        add_tab_category_input.setAttribute("aria-describedby", "emailHelp");
+        add_tab_category_input.setAttribute("placeholder", "Catégorie");
+        let add_tab_category_text = document.createElement("small");
+        add_tab_category_text.classList.add("form-text", "text-muted");
+        add_tab_category_text.innerHTML = "Catégorie du produit";
+        add_tab_category.appendChild(add_tab_category_input);
+        add_tab_category.appendChild(add_tab_category_text);
+        let add_tab_price = document.createElement("div");
+        add_tab_price.classList.add("form-group");
+        let add_tab_price_input = document.createElement("input");
+        add_tab_price_input.classList.add("form-control");
+        add_tab_price_input.setAttribute("type", "number");
+        add_tab_price_input.setAttribute("id", "price");
+        add_tab_price_input.setAttribute("aria-describedby", "emailHelp");
+        add_tab_price_input.setAttribute("placeholder", "Prix");
+        let add_tab_price_text = document.createElement("small");
+        add_tab_price_text.classList.add("form-text", "text-muted");
+        add_tab_price_text.innerHTML = "Prix du produit";
+        add_tab_price.appendChild(add_tab_price_input);
+        add_tab_price.appendChild(add_tab_price_text);
+        let add_tab_description = document.createElement("div");
+        add_tab_description.classList.add("form-group");
+        let add_tab_description_input = document.createElement("textarea");
+        add_tab_description_input.classList.add("form-control");
+        add_tab_description_input.setAttribute("id", "description");
+        add_tab_description_input.setAttribute("rows", "3");
+        add_tab_description_input.innerHTML = "Description...";
+        let add_tab_description_text = document.createElement("small");
+        add_tab_description_text.classList.add("form-text", "text-muted");
+        add_tab_description_text.innerHTML = "Description du produit";
+        add_tab_description.appendChild(add_tab_description_input);
+        add_tab_description.appendChild(add_tab_description_text);
+        let add_tab_image = document.createElement("div");
+        add_tab_image.classList.add("form-group");
+        let add_tab_image_input = document.createElement("input");
+        add_tab_image_input.classList.add("form-control");
+        add_tab_image_input.setAttribute("type", "text");
+        add_tab_image_input.setAttribute("id", "image");
+        add_tab_image_input.setAttribute("aria-describedby", "emailHelp");
+        add_tab_image_input.setAttribute("placeholder", "Url");
+        let add_tab_image_text = document.createElement("small");
+        add_tab_image_text.classList.add("form-text", "text-muted");
+        add_tab_image_text.innerHTML = "URL vers l'image du prduit";
+        add_tab_image.appendChild(add_tab_image_input);
+        add_tab_image.appendChild(add_tab_image_text);
+        let add_tab_button = document.createElement("button");
+        add_tab_button.classList.add("btn", "btn-primary", "mt-3");
+        add_tab_button.setAttribute("id", "addProduct");
+        add_tab_button.innerHTML = "Ajouter";
+        add_tab.appendChild(add_tab_header);
+        add_tab.appendChild(add_tab_form);
+        add_tab.appendChild(add_tab_category);
+        add_tab.appendChild(add_tab_price);
+        add_tab.appendChild(add_tab_description);
+        add_tab.appendChild(add_tab_image);
+        add_tab.appendChild(add_tab_button);
+        // Delete tab
+        let delete_tab = document.createElement("div");
+        delete_tab.classList.add("tab-pane", "fade");
+        delete_tab.setAttribute("id", "delete");
+        delete_tab.setAttribute("role", "tabpanel");
+        let delete_tab_header = document.createElement("h3");
+        delete_tab_header.classList.add("mt-3");
+        delete_tab_header.innerHTML = "Supprimer un produit";
+        let delete_tab_form = document.createElement("div");
+        delete_tab_form.classList.add("form-group", "mt-3");
+        let delete_tab_number = document.createElement("input");
+        delete_tab_number.classList.add("form-control");
+        delete_tab_number.setAttribute("type", "number");
+        delete_tab_number.setAttribute("id", "product_id");
+        delete_tab_number.setAttribute("aria-describedby", "emailHelp");
+        delete_tab_number.setAttribute("placeholder", "Identifiant");
+        let delete_tab_number_text = document.createElement("small");
+        delete_tab_number_text.classList.add("form-text", "text-muted");
+        delete_tab_number_text.innerHTML = "Identifiant du produit dans la base de données";
+        delete_tab_form.appendChild(delete_tab_number);
+        delete_tab_form.appendChild(delete_tab_number_text);
+        let delete_tab_button = document.createElement("button");
+        delete_tab_button.classList.add("btn", "btn-primary", "mt-3");
+        delete_tab_button.setAttribute("id", "deleteProduct");
+        delete_tab_button.innerHTML = "Supprimer";
+        delete_tab.appendChild(delete_tab_header);
+        delete_tab.appendChild(delete_tab_form);
+        delete_tab.appendChild(delete_tab_button);
+
+        // Append tabs
+        tab_content.appendChild(add_tab);
+        tab_content.appendChild(delete_tab);
+        // Append content
+        actions_div.appendChild(tab_content);
+        document.getElementById("actions_content").appendChild(actions_div);
+
+
+    }
+}
 
 /**
  * Logout the user

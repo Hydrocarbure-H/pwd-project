@@ -97,6 +97,11 @@ function register($db): void
             display_response("error", "User already exists.", 403);
         }
 
+        if ($account_type != "admin" && $account_type != "buyer" && $account_type != "vendor")
+        {
+            display_response("error", "Account type must be 'admin' or 'buyer' or 'vendor'.", 403);
+        }
+
         // Insert user
         try
         {
