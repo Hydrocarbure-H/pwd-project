@@ -8,7 +8,7 @@
 export function post_request(endpoint, post_data, token = null)
 {
 
-    const url = "http://localhost:12221" + endpoint;
+    const url = "https://thomas.efrei.ws" + endpoint;
     let xhr = new XMLHttpRequest()
 
     xhr.open('POST', url, true)
@@ -32,7 +32,7 @@ export function post_request(endpoint, post_data, token = null)
  */
 export function get_request(endpoint, token = null)
 {
-    const url = "http://localhost:12221" + endpoint;
+    const url = "https://thomas.efrei.ws" + endpoint;
     let xhr = new XMLHttpRequest()
     xhr.open('GET', url, true)
     if (token)
