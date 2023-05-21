@@ -192,3 +192,120 @@ function flash($db): void
         display_response("success", $products, 200);
     }
 }
+
+
+function add_product($db): void
+{
+    if (isset($_POST['token']))
+    {
+        $token = $_POST['token'];
+        $query = $db->prepare('SELECT * FROM users WHERE token = :token');
+        $query->execute([
+            'token' => $token
+        ]);
+        $user = $query->fetch(PDO::FETCH_ASSOC);
+        if (count($user) === 0)
+        {
+            display_response("error", "User not found.", 404);
+        }
+        else
+        {
+            if ($user['account_type'] === "vendor")
+            {
+                // Check if all the parameters are set
+                if (isset($_POST['name']) && isset($_POST['category_id']) && isset($_POST['price']) && isset($_POST['description']) && isset($_POST['image']))
+                {
+                    $name = $_POST['name'];
+                    $category_id = $_POST['category_id'];
+                    $price = $_POST['price'];
+                    $description = $_POST['description'];
+                    $vendor_id = $user['id'];
+                    $image = $_POST['image'];
+                    // Check if the category exists
+                    $query = $db->prepare('SELECT * FROM categories WHERE id = :id');
+                    $query->execute([
+                        'id' => $category_id
+                    ]);
+                    $category = $query->fetch(PDO::FETCH_ASSOC);
+                    if (!$category)
+                    {
+                        display_response("error", "Category not found.", 404);
+                    }
+                    $query = $db->prepare('INSERT INTO products (name, category_id, price, description, vendor_id, image) VALUES (:name, :category_id, :price, :description, :vendor_id, :image)');
+                    $query->execute([
+                        'name' => $name,
+                        'category_id' => $category_id,
+                        'price' => $price,
+                        'description' => $description,
+                        'vendor_id' => $vendor_id,
+                        'image' => $image
+                    ]);
+                    if ($query->rowCount() > 0)
+                    {
+                        display_response("success", "Product added.", 200);
+                    }
+                    else
+                    {
+                        display_response("error", "Error while adding product.", 500);
+                    }
+                }
+                else
+                {
+                    display_response("error", "Missing parameters.", 403);
+                }
+            }
+            else
+            {
+                display_response("error", "You are not a vendor.", 403);
+            }
+        }
+    }
+}
+
+function remove_product($db): void
+{
+    if (isset($_POST['token']))
+    {
+        $token = $_POST['token'];
+        $query = $db->prepare('SELECT * FROM users WHERE token = :token');
+        $query->execute([
+            'token' => $token
+        ]);
+        $user = $query->fetch(PDO::FETCH_ASSOC);
+        if (count($user) === 0)
+        {
+            display_response("error", "User not found.", 404);
+        }
+        else
+        {
+            if ($user['account_type'] === "vendor")
+            {
+
+                if (isset($_POST['id']))
+                {
+                    $id = $_POST['id'];
+                    $query = $db->prepare('DELETE FROM products WHERE id = :id');
+                    $query->execute([
+                        'id' => $id
+                    ]);
+                    if ($query->rowCount() > 0)
+                    {
+                        display_response("success", "Product removed.", 200);
+                    }
+                    else
+                    {
+                        display_response("error", "Error while removing product.", 500);
+                    }
+                }
+                else
+                {
+                    display_response("error", "Missing parameters.", 403);
+                }
+            }
+            else
+            {
+                display_response("error", "You are not a vendor.", 403);
+            }
+        }
+    }
+}

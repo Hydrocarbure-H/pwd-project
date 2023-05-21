@@ -1,4 +1,4 @@
-import {add_vendor, remove_vendor} from "./actions.js";
+import {add_vendor, remove_vendor, add_product, remove_product} from "./actions.js";
 
 /**
  * Display the profile of the user (vendor or buyer)
@@ -272,6 +272,31 @@ function vendor_actions()
     // Append content
     actions_div.appendChild(tab_content);
     document.getElementById("actions_content").appendChild(actions_div);
+
+    // add event listener on add button
+    document.getElementById("addProduct").addEventListener("click", function ()
+    {
+        let category = document.getElementById("category").value;
+        let name = document.getElementById("name").value;
+        let price = document.getElementById("price").value;
+        let description = document.getElementById("description").value;
+        let image = document.getElementById("image").value;
+
+        add_product({
+            "category_id": category,
+            "name": name,
+            "price": price,
+            "description": description,
+            "image": image
+        });
+    })
+
+    // add event listener on delete button
+    document.getElementById("deleteProduct").addEventListener("click", function ()
+    {
+        let id = document.getElementById("product_id").value;
+        remove_product(id);
+    });
 }
 
 function admin_actions()

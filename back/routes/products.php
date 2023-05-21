@@ -55,3 +55,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET')
         display_response("error", "Query parameter missing.", 403);
     }
 }
+else if ($_SERVER['REQUEST_METHOD'] === 'POST')
+{
+    $_POST = json_decode(file_get_contents("php://input"), true);
+    // Check if the request is for a specific product
+    if (isset($_POST['query']))
+    {
+        switch ($_POST['query'])
+        {
+            // Add a product to the shopcart
+            // Add a product to the db
+            case 'add_product':
+                add_product($db);
+                break;
+            // Add a product to the db
+            case 'remove_product':
+                remove_product($db);
+                break;
+            default:
+                display_response("error", "Unknown request.", 403);
+                break;
+        }
+    }
+    else
+    {
+        display_response("error", "Query parameter missing.", 403);
+    }
+}
+else
+{
+    display_response("error", "Unknown request.", 403);
+}
