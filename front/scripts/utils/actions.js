@@ -1,6 +1,10 @@
 import {post_request} from "./requests.js";
 import display_message from "./errors.js";
 
+/**
+ * Add a vendor to the database
+ * @param vendor
+ */
 export function add_vendor(vendor)
 {
     post_request("/pwd-project/back/routes/users.php", JSON.stringify({
@@ -25,6 +29,10 @@ export function add_vendor(vendor)
     }
 }
 
+/**
+ * Remove a vendor from the database
+ * @param id
+ */
 export function remove_vendor(id)
 {
     post_request("/pwd-project/back/routes/users.php", JSON.stringify({
@@ -45,9 +53,12 @@ export function remove_vendor(id)
     }
 }
 
+/**
+ * Add a product to the database
+ * @param product
+ */
 export function add_product(product)
 {
-    console.log(product);
     post_request("/pwd-project/back/routes/products.php", JSON.stringify({
         "query": "add_product",
         "name": product.name,
@@ -58,7 +69,6 @@ export function add_product(product)
         "token": localStorage.getItem("token")
     })).onload = function ()
     {
-        console.log(this.responseText);
         let response = JSON.parse(this.responseText);
         if (response.type === "success")
         {
@@ -71,6 +81,10 @@ export function add_product(product)
     }
 }
 
+/**
+ * Remove a product from the database
+ * @param id
+ */
 export function remove_product(id)
 {
     post_request("/pwd-project/back/routes/products.php", JSON.stringify({

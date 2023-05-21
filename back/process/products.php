@@ -193,13 +193,17 @@ function flash($db): void
     }
 }
 
-
+/**
+ * Add a product
+ * @param $db
+ * @return void
+ */
 function add_product($db): void
 {
     if (isset($_POST['token']))
     {
         $token = $_POST['token'];
-        $query = $db->prepare('SELECT * FROM users WHERE token = :token');
+        $query = $db->prepare('SELECT * FROM users WHERE token = :token AND account_type = "vendor"');
         $query->execute([
             'token' => $token
         ]);
@@ -262,12 +266,17 @@ function add_product($db): void
     }
 }
 
+/**
+ * Remove a product
+ * @param $db
+ * @return void
+ */
 function remove_product($db): void
 {
     if (isset($_POST['token']))
     {
         $token = $_POST['token'];
-        $query = $db->prepare('SELECT * FROM users WHERE token = :token');
+        $query = $db->prepare('SELECT * FROM users WHERE token = :token AND account_type = "vendor"');
         $query->execute([
             'token' => $token
         ]);

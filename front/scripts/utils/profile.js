@@ -100,6 +100,10 @@ export default function display_profile(location, response, type = "normal")
     display_actions(response);
 }
 
+/**
+ * Display the actions of the user (vendor or admin)
+ * @param response
+ */
 function display_actions(response)
 {
     let account_type = JSON.parse(response).message.account_type;
@@ -107,13 +111,21 @@ function display_actions(response)
     {
         vendor_actions();
     }
-    if (account_type === "admin")
+    else if (account_type === "admin")
     {
         admin_actions();
     }
+    else
+    {
+        // Delete the actions div
+        let actions_div = document.getElementById("actions");
+        actions_div.remove();
+    }
 }
 
-
+/**
+ * Display the actions of the vendor
+ */
 function vendor_actions()
 {
     let actions_div = document.createElement("div");
@@ -266,14 +278,11 @@ function vendor_actions()
     delete_tab.appendChild(delete_tab_header);
     delete_tab.appendChild(delete_tab_form);
     delete_tab.appendChild(delete_tab_button);
-    // Append tabs
     tab_content.appendChild(add_tab);
     tab_content.appendChild(delete_tab);
-    // Append content
     actions_div.appendChild(tab_content);
     document.getElementById("actions_content").appendChild(actions_div);
 
-    // add event listener on add button
     document.getElementById("addProduct").addEventListener("click", function ()
     {
         let category = document.getElementById("category").value;
@@ -299,6 +308,9 @@ function vendor_actions()
     });
 }
 
+/**
+ * Display the actions of the admin
+ */
 function admin_actions()
 {
     let actions_div = document.createElement("div");
