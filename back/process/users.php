@@ -195,7 +195,7 @@ function vendor_profile($db): void
         $query = null;
         try
         {
-            $query = $db->prepare('SELECT * FROM users WHERE id = :user_id and account_type = "vendor"');
+            $query = $db->prepare('SELECT firstname, lastname, email, account_type, address, created_at FROM users WHERE id = :user_id AND account_type = "vendor"');
             $query->execute([
                 'user_id' => $vendor_id
             ]);

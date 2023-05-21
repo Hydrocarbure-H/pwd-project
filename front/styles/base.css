@@ -69,6 +69,14 @@ a:hover {
     margin: 10px 0px;
 }
 
+.mail_link {
+    text-decoration: none;
+}
+
+.mail_link:hover {
+    text-decoration: underline;
+}
+
 /* media 785px */
 @media (max-width: 785px) {
 
