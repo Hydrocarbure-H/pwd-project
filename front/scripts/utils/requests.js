@@ -17,7 +17,6 @@ export function post_request(endpoint, post_data, token = null)
     {
         // Add the token to the header
         xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-
     }
     xhr.send(post_data);
 
