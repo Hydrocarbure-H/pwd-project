@@ -6,7 +6,6 @@ import display_products from "../utils/products.js";
 $(document).ready(function ()
 {
     // Get profile data
-    // get vendor_id from url
     let url = new URL(window.location.href);
     let vendor_id = url.searchParams.get("vendor_id");
     get_vendor_profile(vendor_id);

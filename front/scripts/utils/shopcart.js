@@ -164,7 +164,7 @@ export function display_shopcart_dialog(amount)
     card_body.appendChild(progress);
     card.appendChild(card_header);
     card.appendChild(card_body);
-    // Add the event listener
+
     button.addEventListener("click", function (e)
     {
         console.log("submit");

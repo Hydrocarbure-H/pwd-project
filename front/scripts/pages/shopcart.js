@@ -1,7 +1,7 @@
 import {post_request} from "../utils/requests.js";
 import display_products from "../utils/products.js";
 import display_message from "../utils/errors.js";
-// on ready
+
 $(document).ready(function ()
 {
     // Check if the user is already logged in
@@ -12,7 +12,6 @@ $(document).ready(function ()
     }
 
     get_shopcart();
-
 });
 
 /**
@@ -42,9 +41,12 @@ function get_shopcart()
     }
 }
 
+/**
+ * Validate the shopcart
+ * @param amount
+ */
 export default function validate(amount)
 {
-    // get the progress bar progress_validate
     let progress_validate = 0;
     let progress_bar = document.getElementById("progress_validate");
     let progress_interval = setInterval(function ()
@@ -60,8 +62,6 @@ export default function validate(amount)
     // wait 2 seconds
     setTimeout(function ()
     {
-
-
         post_request("/pwd-project/back/routes/shopcart.php", JSON.stringify({
             "query": "validate",
             "token": localStorage.getItem("token"),
@@ -77,7 +77,6 @@ export default function validate(amount)
             {
                 display_message("success", "Succès ! ", "Votre panier a été validé avec succès ! " + json["message"] + " - Vous allez être redirigé vers l'accueil dans quelques secondes...", "shopcart_content");
 
-                // Reset the progress bar and fill in every 100ms
                 let progress_validate = 0;
                 let progress_bar = document.getElementById("progress_validate");
                 let progress_interval = setInterval(function ()
