@@ -1,3 +1,5 @@
+import {add_vendor, remove_vendor} from "./actions.js";
+
 /**
  * Display the profile of the user (vendor or buyer)
  * @param location
@@ -110,6 +112,7 @@ function display_actions(response)
         admin_actions();
     }
 }
+
 
 function vendor_actions()
 {
@@ -325,7 +328,7 @@ function admin_actions()
     let add_tab_name = document.createElement("input");
     add_tab_name.classList.add("form-control");
     add_tab_name.setAttribute("type", "text");
-    add_tab_name.setAttribute("id", "name");
+    add_tab_name.setAttribute("id", "firstname");
     add_tab_name.setAttribute("aria-describedby", "emailHelp");
     add_tab_name.setAttribute("placeholder", "Prénom");
     let add_tab_name_text = document.createElement("small");
@@ -338,7 +341,7 @@ function admin_actions()
     let add_tab_category_input = document.createElement("input");
     add_tab_category_input.classList.add("form-control");
     add_tab_category_input.setAttribute("type", "text");
-    add_tab_category_input.setAttribute("id", "category");
+    add_tab_category_input.setAttribute("id", "lastname");
     add_tab_category_input.setAttribute("aria-describedby", "emailHelp");
     add_tab_category_input.setAttribute("placeholder", "Nom");
     let add_tab_category_text = document.createElement("small");
@@ -351,7 +354,7 @@ function admin_actions()
     let add_tab_price_input = document.createElement("input");
     add_tab_price_input.classList.add("form-control");
     add_tab_price_input.setAttribute("type", "text");
-    add_tab_price_input.setAttribute("id", "price");
+    add_tab_price_input.setAttribute("id", "email");
     add_tab_price_input.setAttribute("aria-describedby", "emailHelp");
     add_tab_price_input.setAttribute("placeholder", "Adresse Email");
     let add_tab_price_text = document.createElement("small");
@@ -363,9 +366,9 @@ function admin_actions()
     add_tab_description.classList.add("form-group");
     let add_tab_description_input = document.createElement("textarea");
     add_tab_description_input.classList.add("form-control");
-    add_tab_description_input.setAttribute("id", "description");
+    add_tab_description_input.setAttribute("id", "address");
     add_tab_description_input.setAttribute("rows", "3");
-    add_tab_description_input.innerHTML = "Adresse";
+    add_tab_description_input.innerHTML = "";
     let add_tab_description_text = document.createElement("small");
     add_tab_description_text.classList.add("form-text", "text-muted");
     add_tab_description_text.innerHTML = "Adresse du vendeur";
@@ -429,6 +432,31 @@ function admin_actions()
     // Append content
     actions_div.appendChild(tab_content);
     document.getElementById("actions_content").appendChild(actions_div);
+
+    // add event listener on add button
+    document.getElementById("addProduct").addEventListener("click", function ()
+    {
+        let firstname = document.getElementById("firstname").value;
+        let lastname = document.getElementById("lastname").value;
+        let email = document.getElementById("email").value;
+        let password = document.getElementById("password").value;
+        let address = document.getElementById("address").value;
+
+        add_vendor({
+            "firstname": firstname,
+            "lastname": lastname,
+            "email": email,
+            "password": password,
+            "address": address
+        })
+    });
+
+    // add event listener on delete button
+    document.getElementById("deleteProduct").addEventListener("click", function ()
+    {
+        let id = document.getElementById("product_id").value;
+        remove_vendor(id);
+    });
 }
 
 /**

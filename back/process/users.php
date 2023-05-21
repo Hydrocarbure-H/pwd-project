@@ -125,6 +125,11 @@ function register($db): void
     }
 }
 
+/**
+ * Get user's profile
+ * @param $db
+ * @return void
+ */
 function profile($db): void
 {
     if (isset($_POST['token']) && $_POST['token'] != "")
@@ -222,5 +227,157 @@ function vendor_profile($db): void
     else
     {
         display_response("error", "Missing parameters.", 403);
+    }
+}
+
+/**
+ * Add a user
+ * @param $db
+ * @return void
+ */
+function add_user($db): void
+{
+    // allow the admin to add a vendor
+    // Check the token of the admin
+    if (isset($_POST['token']) && $_POST['token'] != "")
+    {
+        $token = $_POST['token'];
+        $query = null;
+        try
+        {
+            $query = $db->prepare('SELECT * FROM users WHERE token = :token AND account_type = "admin"');
+            $query->execute([
+                'token' => $token
+            ]);
+        } catch (PDOException $e)
+        {
+            display_response("error", $e->getMessage(), 500);
+        }
+
+        $admin = $query->fetch(PDO::FETCH_ASSOC);
+        if ($admin)
+        {
+            // Check if user already exists
+            $query = null;
+            try
+            {
+                $query = $db->prepare('SELECT * FROM users WHERE email = :email');
+                $query->execute([
+                    'email' => $_POST['email']
+                ]);
+            } catch (PDOException $e)
+            {
+                display_response("error", $e->getMessage(), 500);
+            }
+
+            if ($query->fetch(PDO::FETCH_ASSOC))
+            {
+                display_response("error", "User already exists.", 403);
+            }
+
+            // Insert user
+            try
+            {
+                $query = $db->prepare('INSERT INTO users(email, password, firstname, lastname, account_type, address) VALUES (:email, :password, :firstname, :lastname, :account_type, :address)');
+                $query->execute([
+                    'email' => $_POST['email'],
+                    'password' => $_POST['password'],
+                    'firstname' => $_POST['firstname'],
+                    'lastname' => $_POST['lastname'],
+                    'account_type' => "vendor",
+                    'address' => $_POST['address']
+                ]);
+            } catch (PDOException $e)
+            {
+                display_response("error", $e->getMessage(), 500);
+            }
+            display_response("success", "User registered.", 200);
+        }
+        else
+        {
+            display_response("error", "User not found.", 404);
+        }
+    }
+    else
+    {
+        display_response("error", "Token missing. Please reconnect.", 403);
+    }
+}
+
+/**
+ * Remove a user
+ * @param $db
+ * @return void
+ */
+function remove_user($db): void
+{
+    if (isset($_POST['token']) && $_POST['token'] != "")
+    {
+        $token = $_POST['token'];
+        $query = null;
+        try
+        {
+            $query = $db->prepare('SELECT * FROM users WHERE token = :token AND account_type = "admin"');
+            $query->execute([
+                'token' => $token
+            ]);
+        } catch (PDOException $e)
+        {
+            display_response("error", $e->getMessage(), 500);
+        }
+
+        $admin = $query->fetch(PDO::FETCH_ASSOC);
+        if ($admin)
+        {
+            // Check if $post has user_id
+            if (!isset($_POST['vendor_id']) || $_POST['vendor_id'] == "")
+            {
+                display_response("error", "Missing parameters.", 403);
+            }
+
+            // Check if user exists
+            $query = null;
+            try
+            {
+                $query = $db->prepare('SELECT * FROM users WHERE id = :id');
+                $query->execute([
+                    'id' => $_POST['vendor_id']
+                ]);
+            } catch (PDOException $e)
+            {
+                display_response("error", $e->getMessage(), 500);
+            }
+
+            if (!$query->fetch(PDO::FETCH_ASSOC))
+            {
+                display_response("error", "User not found.", 200);
+            }
+
+            try
+            {
+                // Delete all products of the user
+                $query = $db->prepare('DELETE FROM products WHERE vendor_id = :id');
+                $query->execute([
+                    'id' => $_POST['vendor_id']
+                ]);
+
+                $query = $db->prepare('DELETE FROM users WHERE id = :id');
+                $query->execute([
+                    'id' => $_POST['vendor_id']
+                ]);
+            } catch (PDOException $e)
+            {
+                display_response("error", $e->getMessage(), 500);
+            }
+            display_response("success", "User removed.", 200);
+        }
+        else
+        {
+            display_response("error", "User not found.", 404);
+        }
+    }
+    else
+    {
+        display_response("error", "Token missing. Please reconnect.", 403);
     }
 }

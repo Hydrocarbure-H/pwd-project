@@ -16,3 +16,7 @@ PWD stands for :
 - Empty shopcart with a button
 - Improve creation of elements in JS
 - Imrpove login system
+- Do a DELETE request and PUT instead of POST
+- Hash password : but currently no way to change password so
+- Add table for account types
+- 
