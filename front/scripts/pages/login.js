@@ -45,7 +45,7 @@ function login()
     progress_bar.style.width = "0%";
     document.getElementById("error").innerHTML = "";
 
-    post_request("/pwd-project/back/routes/users.php", JSON.stringify({
+    post_request("/back/routes/users.php", JSON.stringify({
         "query": "login",
         "email": email,
         "password": password

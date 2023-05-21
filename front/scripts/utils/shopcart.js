@@ -8,7 +8,7 @@ import validate from "../pages/shopcart.js";
  */
 export function add_product(product_id)
 {
-    post_request("/pwd-project/back/routes/shopcart.php", JSON.stringify({
+    post_request("/back/routes/shopcart.php", JSON.stringify({
         "query": "add",
         "token": localStorage.getItem("token"),
         "product_id": product_id
@@ -38,7 +38,7 @@ export function add_product(product_id)
  */
 export function remove_product(shopcart_product_id)
 {
-    post_request("/pwd-project/back/routes/shopcart.php", JSON.stringify({
+    post_request("/back/routes/shopcart.php", JSON.stringify({
         "query": "remove",
         "token": localStorage.getItem("token"),
         "id": shopcart_product_id

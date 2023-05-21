@@ -17,7 +17,7 @@ $(document).ready(function ()
  */
 function get_vendor_profile(vendor_id)
 {
-    post_request("/pwd-project/back/routes/users.php", JSON.stringify({
+    post_request("/back/routes/users.php", JSON.stringify({
         "query": "vendor_profile",
         "vendor_id": Number(vendor_id)
     })).onload = function ()
@@ -28,7 +28,7 @@ function get_vendor_profile(vendor_id)
 
 function get_vendor_products(vendor_id)
 {
-    get_request("/pwd-project/back/routes/products.php?query=vendor&id=" + vendor_id
+    get_request("/back/routes/products.php?query=vendor&id=" + vendor_id
     ).onload = function ()
     {
         display_products(this.responseText);

@@ -42,7 +42,7 @@ function register()
     progress_bar.style.width = "0%";
     document.getElementById("error").innerHTML = "";
 
-    post_request("/pwd-project/back/routes/users.php", JSON.stringify({
+    post_request("/back/routes/users.php", JSON.stringify({
         "query": "register",
         "email": email,
         "password": password,

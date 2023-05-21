@@ -22,7 +22,7 @@ $(document).ready(function ()
  */
 function get_all_products()
 {
-    get_request("/pwd-project/back/routes/products.php?query=all").onload = function ()
+    get_request("/back/routes/products.php?query=all").onload = function ()
     {
         display_products(this.responseText);
     };
@@ -35,7 +35,7 @@ function get_all_products()
  */
 function get_products_by_category(category)
 {
-    get_request("/pwd-project/back/routes/products.php?query=category&name=" + category).onload = function ()
+    get_request("/back/routes/products.php?query=category&name=" + category).onload = function ()
     {
         display_products(this.responseText);
     };

@@ -19,7 +19,7 @@ $(document).ready(function ()
  */
 function get_shopcart()
 {
-    post_request("/pwd-project/back/routes/shopcart.php", JSON.stringify({
+    post_request("/back/routes/shopcart.php", JSON.stringify({
         "query": "get",
         "token": localStorage.getItem("token")
     })).onload = function ()
@@ -62,7 +62,7 @@ export default function validate(amount)
     // wait 2 seconds
     setTimeout(function ()
     {
-        post_request("/pwd-project/back/routes/shopcart.php", JSON.stringify({
+        post_request("/back/routes/shopcart.php", JSON.stringify({
             "query": "validate",
             "token": localStorage.getItem("token"),
             "amount": amount

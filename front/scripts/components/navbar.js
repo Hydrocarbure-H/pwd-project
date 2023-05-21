@@ -44,7 +44,7 @@ export default function create_navbar()
     ul_navbar_nav.appendChild(li_navbar_nav_home);
 
     // Create the dropdown menu with categories
-    get_request("/pwd-project/back/routes/products.php?query=categories").onload = function ()
+    get_request("/back/routes/products.php?query=categories").onload = function ()
     {
 
         let json = this.responseText;

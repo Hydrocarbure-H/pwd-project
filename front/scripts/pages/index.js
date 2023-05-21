@@ -12,7 +12,7 @@ $(document).ready(function ()
  */
 function get_flash()
 {
-    get_request("/pwd-project/back/routes/products.php?query=flash").onload = function ()
+    get_request("/back/routes/products.php?query=flash").onload = function ()
     {
         let json = this.responseText;
         let response = JSON.parse(json)

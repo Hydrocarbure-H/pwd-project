@@ -12,7 +12,7 @@ $(document).ready(function ()
  */
 function get_profile()
 {
-    post_request("/pwd-project/back/routes/users.php", JSON.stringify({
+    post_request("/back/routes/users.php", JSON.stringify({
         "query": "profile",
         "token": localStorage.getItem("token")
     })).onload = function ()
