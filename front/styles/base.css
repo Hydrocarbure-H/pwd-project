@@ -41,13 +41,32 @@ body {
     margin-left: 5px;
 }
 
-.card {
-    box-shadow: 0 0 5px 0 rgba(0, 0, 0, .2);
-    border: none;
-}
 
 a:hover {
     cursor: pointer;
+}
+
+
+.card {
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, .2);
+    border: none;
+    margin: 10px;
+    min-width: calc(33% - 30px);
+    max-width: 400px;
+    max-height: 350px;
+    transition: all .3s;
+}
+
+.card:hover {
+    cursor: pointer;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, .2);
+    transform: scale(1.03);
+}
+
+.card-img-top {
+    max-height: 100px;
+    object-fit: contain;
+    margin: 10px 0px;
 }
 
 /* media 785px */

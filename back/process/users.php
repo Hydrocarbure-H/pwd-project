@@ -22,8 +22,7 @@ function login($db): void
             $query->execute([
                 'email' => $email
             ]);
-        }
-        catch (PDOException $e)
+        } catch (PDOException $e)
         {
             display_response("error", $e->getMessage(), 500);
         }
@@ -41,8 +40,7 @@ function login($db): void
                         'token' => $token,
                         'id' => $user['id']
                     ]);
-                }
-                catch (PDOException $e)
+                } catch (PDOException $e)
                 {
                     display_response("error", $e->getMessage(), 500);
                 }
@@ -89,8 +87,7 @@ function register($db): void
             $query->execute([
                 'email' => $email
             ]);
-        }
-        catch (PDOException $e)
+        } catch (PDOException $e)
         {
             display_response("error", $e->getMessage(), 500);
         }
@@ -111,8 +108,7 @@ function register($db): void
                 'lastname' => $lastname,
                 'account_type' => $account_type
             ]);
-        }
-        catch (PDOException $e)
+        } catch (PDOException $e)
         {
             display_response("error", $e->getMessage(), 500);
         }
@@ -136,8 +132,7 @@ function profile($db): void
             $query->execute([
                 'token' => $token
             ]);
-        }
-        catch (PDOException $e)
+        } catch (PDOException $e)
         {
             display_response("error", $e->getMessage(), 500);
         }
@@ -175,8 +170,7 @@ function logout($db): void
             $query->execute([
                 'token' => $token
             ]);
-        }
-        catch (PDOException $e)
+        } catch (PDOException $e)
         {
             display_response("error", $e->getMessage(), 500);
         }
@@ -185,5 +179,43 @@ function logout($db): void
     else
     {
         display_response("error", "Token missing. Please reconnect.", 403);
+    }
+}
+
+/**
+ * Get Vendor's profile
+ * @param $db
+ */
+function vendor_profile($db): void
+{
+    if (isset($_POST['vendor_id']) && $_POST['vendor_id'] != "")
+    {
+        $vendor_id = $_POST['vendor_id'];
+
+        $query = null;
+        try
+        {
+            $query = $db->prepare('SELECT * FROM users WHERE id = :user_id and account_type = "vendor"');
+            $query->execute([
+                'user_id' => $vendor_id
+            ]);
+        } catch (PDOException $e)
+        {
+            display_response("error", $e->getMessage(), 500);
+        }
+        if ($query->rowCount() == 0)
+        {
+            display_response("error", "Vendor not found.", 404);
+        }
+        else
+        {
+            $vendor = $query->fetch(PDO::FETCH_ASSOC);
+            unset($vendor['password']);
+            display_response("success", $vendor, 200);
+        }
+    }
+    else
+    {
+        display_response("error", "Missing parameters.", 403);
     }
 }

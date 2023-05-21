@@ -39,7 +39,6 @@ export function get_request(endpoint, token = null)
     {
         // Add the token to the header
         xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-
     }
     xhr.send();
     return xhr;

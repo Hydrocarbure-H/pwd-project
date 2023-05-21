@@ -12,6 +12,7 @@ function all($db): void
        price, 
        image, 
        users.firstname as vendor,
+      users.id as vendor_id,
        description,
        products.id as id
         FROM products 
@@ -46,6 +47,7 @@ function category($db): void
        price, 
        image, 
        users.firstname as vendor,
+      users.id as vendor_id,
        description,
          products.id as id
         FROM products 
@@ -159,6 +161,7 @@ function flash($db): void
        price, 
        image, 
        users.firstname as vendor,
+       users.id as vendor_id,
        description,
          products.id as id
     FROM products 

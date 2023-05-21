@@ -73,6 +73,7 @@ export default function display_products(json, is_shopcart = false)
             let card_button_div = document.createElement("div");
             card_button_div.classList.add("d-block", "buy-div");
             let card_button = document.createElement("button");
+            let vendor_link = null;
             if (is_shopcart)
             {
                 card_button.classList.add("btn", "btn-danger");
@@ -82,10 +83,18 @@ export default function display_products(json, is_shopcart = false)
             {
                 card_button.classList.add("btn", "btn-dark");
                 card_button.innerHTML = "Ajouter au panier - " + products[i + k * 3]["price"] + "€";
+
+                vendor_link = document.createElement("a");
+                vendor_link.href = "../pages/vendor.html?vendor_id=" + products[i + k * 3]["vendor_id"];
+                vendor_link.innerHTML = "Voir le vendeur";
             }
 
             card_button_div.appendChild(card_button);
             card_body.appendChild(card_title);
+            if (!is_shopcart)
+            {
+                card_body.appendChild(vendor_link);
+            }
             card_body.appendChild(card_subtitle);
             card_body.appendChild(card_image);
             card_body.appendChild(card_text);

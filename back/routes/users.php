@@ -29,8 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
                 try
                 {
                     login($db);
-                }
-                catch (Exception $e)
+                } catch (Exception $e)
                 {
                     display_response("error", $e->getMessage(), 500);
                 }
@@ -39,8 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
                 try
                 {
                     register($db);
-                }
-                catch (Exception $e)
+                } catch (Exception $e)
                 {
                     display_response("error", $e->getMessage(), 500);
                 }
@@ -49,8 +47,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
                 try
                 {
                     profile($db);
+                } catch (Exception $e)
+                {
+                    display_response("error", $e->getMessage(), 500);
                 }
-                catch (Exception $e)
+                break;
+            case 'vendor_profile':
+                try
+                {
+                    vendor_profile($db);
+                } catch (Exception $e)
                 {
                     display_response("error", $e->getMessage(), 500);
                 }
@@ -59,8 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
                 try
                 {
                     logout($db);
-                }
-                catch (Exception $e)
+                } catch (Exception $e)
                 {
                     display_response("error", $e->getMessage(), 500);
                 }

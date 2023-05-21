@@ -32,16 +32,3 @@ body {
     max-width: 90%;
     margin: auto 0;
 }
-
-.card {
-    margin: 10px;
-    min-width: calc(33% - 30px);
-    max-width: 300px;
-    max-height: 350px;
-}
-
-.card-img-top {
-    max-height: 100px;
-    object-fit: contain;
-    margin: 10px 0px;
-}
