@@ -281,9 +281,9 @@ function remove_product($db): void
             if ($user['account_type'] === "vendor")
             {
 
-                if (isset($_POST['id']))
+                if (isset($_POST['product_id']))
                 {
-                    $id = $_POST['id'];
+                    $id = $_POST['product_id'];
                     $query = $db->prepare('DELETE FROM products WHERE id = :id');
                     $query->execute([
                         'id' => $id
@@ -294,7 +294,7 @@ function remove_product($db): void
                     }
                     else
                     {
-                        display_response("error", "Error while removing product.", 500);
+                        display_response("error", "Product not found.", 500);
                     }
                 }
                 else
