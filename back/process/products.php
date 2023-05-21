@@ -98,7 +98,19 @@ function vendor($db): void
     if (isset($_GET['id']))
     {
         $id = $_GET['id'];
-        $query = $db->prepare('SELECT * FROM products WHERE vendor_id = :id');
+        $query = $db->prepare('SELECT
+        products.name as name, 
+       categories.name as category, 
+       price, 
+       image, 
+       users.firstname as vendor,
+      users.id as vendor_id,
+       description,
+         products.id as id
+        FROM products 
+        INNER JOIN categories ON products.category_id = categories.id 
+        INNER JOIN users ON products.vendor_id = users.id WHERE vendor_id = :id ORDER BY products.id ASC'
+        );
         $query->execute([
             'id' => $id
         ]);

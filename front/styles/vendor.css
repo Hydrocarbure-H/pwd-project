@@ -5,7 +5,7 @@
     margin: 10px auto;
 }
 
-.card {
+.profile-card-override {
     box-shadow: 0 0 5px 0 rgba(0, 0, 0, .2);
     border: none;
     margin: 10px;
@@ -14,7 +14,7 @@
     max-height: none;
 }
 
-.card:hover {
+.profile-card-override:hover {
     cursor: default;
     box-shadow: 0 0 5px 0 rgba(0, 0, 0, .2);
     transform: none;

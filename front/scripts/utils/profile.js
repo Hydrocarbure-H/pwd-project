@@ -1,3 +1,9 @@
+/**
+ * Display the profile of the user (vendor or buyer)
+ * @param location
+ * @param response
+ * @param type
+ */
 export default function display_profile(location, response, type = "normal")
 {
     // get profile_content div
@@ -6,7 +12,7 @@ export default function display_profile(location, response, type = "normal")
     let json = JSON.parse(response).message;
     // Create the card
     let card = document.createElement("div");
-    card.classList.add("card", "mb-3");
+    card.classList.add("card", "mb-3", "profile-card-override");
     // Create the card header
     let card_header = document.createElement("h3");
     card_header.classList.add("card-header");
