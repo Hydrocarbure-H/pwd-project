@@ -42,12 +42,12 @@ function get_shopcart()
     }
 }
 
-function validate()
+export default function validate(amount)
 {
     post_request("/pwd-project/back/routes/shopcart.php", JSON.stringify({
         "query": "validate",
         "token": localStorage.getItem("token"),
-        amount: document.getElementById("amount").value
+        "amount": amount
     })).onload = function ()
     {
         let json = JSON.parse(this.responseText);

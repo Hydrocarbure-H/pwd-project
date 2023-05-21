@@ -167,6 +167,7 @@ function validate($db): void
         if (isset($_POST['amount']) && $_POST['amount'] != "")
         {
             $amount = $_POST['amount'];
+            $total['total'] = round($total['total'], 2);
             if ($amount >= $total['total'])
             {
                 $query = null;
