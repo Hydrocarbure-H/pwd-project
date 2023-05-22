@@ -13,7 +13,7 @@ export default function create_navbar()
     let a_navbar_brand = document.createElement("a");
     a_navbar_brand.classList.add("navbar-brand");
     a_navbar_brand.setAttribute("href", "../../pages/index.html");
-    a_navbar_brand.innerHTML = "Efrei Marketplace";
+    a_navbar_brand.innerHTML = "Kiventout";
     let button_navbar_toggler = document.createElement("button");
     button_navbar_toggler.classList.add("navbar-toggler");
     button_navbar_toggler.setAttribute("type", "button");
