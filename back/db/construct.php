@@ -11,6 +11,8 @@ function construct($db): void
 {
     try
     {
+        // Delete database if exists
+        $db->exec('DROP DATABASE IF EXISTS kiventout');
         $db->exec('CREATE DATABASE IF NOT EXISTS kiventout');
         $db->exec('USE kiventout');
     }
