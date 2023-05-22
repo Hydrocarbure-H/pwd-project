@@ -3,6 +3,11 @@ import display_profile from "../utils/profile.js";
 
 $(document).ready(function ()
 {
+    if (!localStorage.getItem("token") || localStorage.getItem("token") === "undefined")
+    {
+        window.location.href = "../pages/login.html";
+        return;
+    }
     // Get profile data
     get_profile();
 });
