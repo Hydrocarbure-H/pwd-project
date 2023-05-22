@@ -167,7 +167,12 @@ export function display_shopcart_dialog(amount)
 
     button.addEventListener("click", function (e)
     {
-        console.log("submit");
+        // Check for empty fields
+        if (input.value === "" || input2.value === "" || input3.value === "")
+        {
+            display_message("danger", "Erreur... ", "Veuillez remplir tous les champs.", "shopcart_content");
+            return;
+        }
         validate(amount);
     });
     shopcart_content.appendChild(card);

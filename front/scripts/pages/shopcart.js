@@ -47,8 +47,9 @@ function get_shopcart()
  */
 export default function validate(amount)
 {
-    let progress_validate = 0;
+    // Check for empty
     let progress_bar = document.getElementById("progress_validate");
+    let progress_validate = 0;
     let progress_interval = setInterval(function ()
     {
         progress_validate += 10;
