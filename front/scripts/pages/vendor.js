@@ -9,7 +9,7 @@ $(document).ready(function ()
     let url = new URL(window.location.href);
     let vendor_id = url.searchParams.get("vendor_id");
     get_vendor_profile(vendor_id);
-    get_vendor_products(vendor_id);
+    // get_vendor_products(vendor_id);
 });
 
 /**
