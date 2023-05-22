@@ -1,4 +1,4 @@
-import {get_request, post_request} from "../utils/requests.js";
+import {get_request} from "../utils/requests.js";
 
 /**
  * Create the navbar
@@ -103,7 +103,7 @@ export default function create_navbar()
         div_collapse_navbar.appendChild(ul_navbar_nav);
         let form_navbar_nav = document.createElement("form");
         form_navbar_nav.classList.add("d-flex");
-        form_navbar_nav.setAttribute("action", "../pages/login.html");
+        form_navbar_nav.setAttribute("action", "../pages/profile.html");
         let button_navbar_nav_account = document.createElement("button");
         button_navbar_nav_account.classList.add("btn", "btn-secondary", "my-2", "my-sm-0");
         button_navbar_nav_account.setAttribute("type", "submit");

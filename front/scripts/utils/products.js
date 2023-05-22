@@ -1,5 +1,4 @@
-import {add_product} from "./shopcart.js";
-import {remove_product} from "./shopcart.js";
+import {add_product, remove_product} from "./shopcart.js";
 import display_message from "./errors.js";
 import {display_shopcart_dialog} from "./shopcart.js";
 

@@ -1,6 +1,5 @@
 import {post_request} from "./requests.js";
 import display_message from "./errors.js";
-import validate from "../pages/shopcart.js";
 
 /**
  * Add a product to the shopcart
@@ -176,4 +175,59 @@ export function display_shopcart_dialog(amount)
         validate(amount);
     });
     shopcart_content.appendChild(card);
+}
+
+
+/**
+ * Validate the shopcart
+ * @param amount
+ */
+function validate(amount)
+{
+    // Check for empty
+    let progress_bar = document.getElementById("progress_validate");
+    let progress_validate = 0;
+    let progress_interval = setInterval(function ()
+    {
+        progress_validate += 10;
+        progress_bar.style.width = progress_validate + "%";
+        if (progress_validate >= 100)
+        {
+            clearInterval(progress_interval);
+        }
+    }, 100);
+
+    // wait 2 seconds
+    setTimeout(function ()
+    {
+        post_request("/back/routes/shopcart.php", JSON.stringify({
+            "query": "validate",
+            "token": localStorage.getItem("token"),
+            "amount": amount
+        })).onload = function ()
+        {
+            let json = JSON.parse(this.responseText);
+            if (json["type"] === "error")
+            {
+                display_message("danger", "Erreur... ", "Impossible de valider votre panier pour le moment. Error: " + json["message"], "shopcart_content");
+            }
+            else
+            {
+                display_message("success", "Succès ! ", "Votre panier a été validé avec succès ! " + json["message"] + " - Vous allez être redirigé vers l'accueil dans quelques secondes...", "shopcart_content");
+
+                let progress_validate = 0;
+                let progress_bar = document.getElementById("progress_validate");
+                let progress_interval = setInterval(function ()
+                {
+                    progress_validate += 10;
+                    progress_bar.style.width = progress_validate + "%";
+                    if (progress_validate >= 100)
+                    {
+                        clearInterval(progress_interval);
+                        window.location.href = "../pages/index.html";
+                    }
+                }, 900);
+            }
+        }
+    }, 2000);
 }
