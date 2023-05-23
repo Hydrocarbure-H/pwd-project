@@ -132,9 +132,10 @@ function get_shopcart_count()
 {
     get_request("/back/routes/shopcart.php?query=get").onload = function ()
     {
+        console.log("test");
         console.log(this.responseText);
         let json = this.responseText;
-        let list = JSON.parse(json)["message"];
+        let list = JSON.parse(json);
         let cart_badge = document.getElementById("cart-badge");
         // get the length of the list
         let count = Object.keys(list).length;
