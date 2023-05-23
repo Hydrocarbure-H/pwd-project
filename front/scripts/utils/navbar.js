@@ -7,6 +7,7 @@ export default function get_shopcart_count()
         "token": localStorage.getItem("token")
     })).onload = function ()
     {
+        console.log(this.responseText);
         let json = this.responseText;
         let response = JSON.parse(json);
         if (response["code"] === "204")
