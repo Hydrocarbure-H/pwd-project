@@ -33,7 +33,7 @@ export default function create_navbar()
     let li_navbar_nav_home = document.createElement("li");
     li_navbar_nav_home.classList.add("nav-item");
     let a_navbar_nav_home = document.createElement("a");
-    a_navbar_nav_home.classList.add("nav-link", "active");
+    a_navbar_nav_home.classList.add("nav-link");
     a_navbar_nav_home.setAttribute("href", "../pages/index.html");
     a_navbar_nav_home.innerHTML = "Accueil";
     let span_navbar_nav_home = document.createElement("span");
