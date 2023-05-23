@@ -132,17 +132,15 @@ export default function create_navbar()
 
 function get_shopcart_count()
 {
-    post_request("/back/routes/shopcart.php", {
+    post_request("/back/routes/shopcart.php", JSON.stringify({
         "query": "get",
         "token": localStorage.getItem("token")
-    }).onload = function ()
+    })).onload = function ()
     {
-        console.log(this.responseText);
         let json = this.responseText;
-        let list = JSON.parse(json);
+        let list = JSON.parse(json).message;
         let cart_badge = document.getElementById("cart-badge");
-        // get the length of the list
-        let count = Object.keys(list).length;
-        cart_badge.innerHTML = count;
+        // get the length of the json list
+        cart_badge.innerHTML = list.length;
     }
 }
