@@ -9,14 +9,14 @@ function display_errors($display = true): void
 
 function display_response($type, $message, $code): void
 {
+    cors();
+    header('Content-Type: application/json; charset=utf-8');
     http_response_code($code);
     $response = array(
         "code" => $code,
         "type" => $type,
         "message" => $message
     );
-    cors();
-    header('Content-Type: application/json; charset=utf-8');
     echo json_encode($response, JSON_PRETTY_PRINT);
     die();
 }
@@ -44,6 +44,4 @@ function cors() {
 
         exit(0);
     }
-
-    echo "You have CORS!";
 }
