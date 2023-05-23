@@ -11,7 +11,7 @@ export default function get_shopcart_count()
         let response = JSON.parse(json);
         let cart_badge = document.getElementById("cart-badge");
 
-        if (response["message"] === "Shopcart empty.")
+        if (response["message"] === "Shopcart empty." || response["message"] === "Token missing. Please reconnect.")
         {
             cart_badge.innerHTML = 0;
             return;
