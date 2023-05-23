@@ -16,6 +16,7 @@ else
 // Check if the request is a GET request
 if ($_SERVER['REQUEST_METHOD'] === 'GET')
 {
+    display_errors(false);
     // Check if the request is for a specific product
     if (isset($_GET['query']))
     {

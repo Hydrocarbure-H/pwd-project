@@ -7,7 +7,7 @@ include "../db/fill.php";
 
 include "../constants.php";
 
-display_errors(true);
+display_errors(false);
 
 if (isset($DB_PASS) && isset($DB_USER) && isset($DB_HOST) && isset($DB_NAME))
 {

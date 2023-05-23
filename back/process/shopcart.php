@@ -206,6 +206,7 @@ function validate($db): void
  */
 function get($db): void
 {
+    display_errors(false);
     if (isset($_POST['token']) && $_POST['token'] != "")
     {
         $token = $_POST['token'];
