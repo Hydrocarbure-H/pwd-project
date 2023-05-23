@@ -12,7 +12,7 @@ export default function create_navbar()
     container_fluid.classList.add("container-fluid");
     let a_navbar_brand = document.createElement("a");
     a_navbar_brand.classList.add("navbar-brand");
-    a_navbar_brand.setAttribute("href", "../../pages/index.html");
+    a_navbar_brand.setAttribute("href", "../pages/index.html");
     a_navbar_brand.innerHTML = "Kiventout";
     let button_navbar_toggler = document.createElement("button");
     button_navbar_toggler.classList.add("navbar-toggler");
@@ -91,12 +91,23 @@ export default function create_navbar()
         a_navbar_nav_notifications.innerHTML = "Notifications";
         li_navbar_nav_notifications.appendChild(a_navbar_nav_notifications);
         ul_navbar_nav.appendChild(li_navbar_nav_notifications);
+
         let li_navbar_nav_cart = document.createElement("li");
         li_navbar_nav_cart.classList.add("nav-item");
         let a_navbar_nav_cart = document.createElement("a");
         a_navbar_nav_cart.classList.add("nav-link");
         a_navbar_nav_cart.setAttribute("href", "../pages/shopcart.html");
         a_navbar_nav_cart.innerHTML = "Panier";
+        // Do a get request to have shopcart count
+        get_request("/back/routes/shopcart.php?query=get").onload = function ()
+        {
+            let json = this.responseText;
+            let shopcart = JSON.parse(json)["message"];
+            let span_navbar_nav_cart_badge = document.createElement("span");
+            span_navbar_nav_cart_badge.classList.add("badge", "rounded-pill", "bg-danger");
+            span_navbar_nav_cart_badge.innerHTML = shopcart.length;
+            a_navbar_nav_cart.appendChild(span_navbar_nav_cart_badge);
+        }
 
         li_navbar_nav_cart.appendChild(a_navbar_nav_cart);
         ul_navbar_nav.appendChild(li_navbar_nav_cart);
