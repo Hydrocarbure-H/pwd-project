@@ -98,16 +98,13 @@ export default function create_navbar()
         a_navbar_nav_cart.classList.add("nav-link");
         a_navbar_nav_cart.setAttribute("href", "../pages/shopcart.html");
         a_navbar_nav_cart.innerHTML = "Panier";
-        // Do a get request to have shopcart count
-        get_request("/back/routes/shopcart.php?query=get").onload = function ()
-        {
-            let json = this.responseText;
-            let shopcart = JSON.parse(json)["message"];
-            let span_navbar_nav_cart_badge = document.createElement("span");
-            span_navbar_nav_cart_badge.classList.add("badge", "rounded-pill", "bg-danger");
-            span_navbar_nav_cart_badge.innerHTML = shopcart.length;
-            a_navbar_nav_cart.appendChild(span_navbar_nav_cart_badge);
-        }
+
+        // add badge with number of items in cart
+        let span_navbar_nav_cart_badge = document.createElement("span");
+        span_navbar_nav_cart_badge.classList.add("badge", "bg-secondary");
+        span_navbar_nav_cart_badge.setAttribute("id", "cart-badge");
+        span_navbar_nav_cart_badge.innerHTML = 0;
+        a_navbar_nav_cart.appendChild(span_navbar_nav_cart_badge);
 
         li_navbar_nav_cart.appendChild(a_navbar_nav_cart);
         ul_navbar_nav.appendChild(li_navbar_nav_cart);
@@ -126,5 +123,16 @@ export default function create_navbar()
         container_fluid.appendChild(div_collapse_navbar);
         navbar.appendChild(container_fluid);
         document.body.appendChild(navbar);
+    }
+}
+
+function get_shopcart_count()
+{
+    get_request("/back/routes/shopcart.php?query=get").onload = function ()
+    {
+        let json = this.responseText;
+        let list = JSON.parse(json)["message"];
+        let cart_badge = document.getElementById("cart-badge");
+        cart_badge.innerHTML = length(list);
     }
 }
