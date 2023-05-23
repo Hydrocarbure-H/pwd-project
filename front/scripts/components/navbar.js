@@ -124,6 +124,8 @@ export default function create_navbar()
         navbar.appendChild(container_fluid);
         document.body.appendChild(navbar);
     }
+
+    get_shopcart_count();
 }
 
 function get_shopcart_count()
