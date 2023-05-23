@@ -83,14 +83,14 @@ export default function create_navbar()
         div_navbar_nav_dropdown.appendChild(a_navbar_nav_dropdown_all);
         ul_navbar_nav.appendChild(li_navbar_nav_dropdown);
 
-        let li_navbar_nav_notifications = document.createElement("li");
-        li_navbar_nav_notifications.classList.add("nav-item");
-        let a_navbar_nav_notifications = document.createElement("a");
-        a_navbar_nav_notifications.classList.add("nav-link");
-        a_navbar_nav_notifications.setAttribute("href", "#");
-        a_navbar_nav_notifications.innerHTML = "Notifications";
-        li_navbar_nav_notifications.appendChild(a_navbar_nav_notifications);
-        ul_navbar_nav.appendChild(li_navbar_nav_notifications);
+        // let li_navbar_nav_notifications = document.createElement("li");
+        // li_navbar_nav_notifications.classList.add("nav-item");
+        // let a_navbar_nav_notifications = document.createElement("a");
+        // a_navbar_nav_notifications.classList.add("nav-link");
+        // a_navbar_nav_notifications.setAttribute("href", "#");
+        // a_navbar_nav_notifications.innerHTML = "Notifications";
+        // li_navbar_nav_notifications.appendChild(a_navbar_nav_notifications);
+        // ul_navbar_nav.appendChild(li_navbar_nav_notifications);
 
         let li_navbar_nav_cart = document.createElement("li");
         li_navbar_nav_cart.classList.add("nav-item");
