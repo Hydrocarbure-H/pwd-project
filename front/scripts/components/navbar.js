@@ -1,4 +1,4 @@
-import {get_request} from "../utils/requests.js";
+import {get_request, post_request} from "../utils/requests.js";
 
 /**
  * Create the navbar
@@ -103,7 +103,7 @@ export default function create_navbar()
         let span_navbar_nav_cart_badge = document.createElement("span");
         span_navbar_nav_cart_badge.classList.add("badge", "bg-secondary");
         span_navbar_nav_cart_badge.setAttribute("id", "cart-badge");
-        span_navbar_nav_cart_badge.innerHTML = 0;
+        span_navbar_nav_cart_badge.innerHTML = "0";
         a_navbar_nav_cart.appendChild(span_navbar_nav_cart_badge);
 
         li_navbar_nav_cart.appendChild(a_navbar_nav_cart);
@@ -124,20 +124,25 @@ export default function create_navbar()
         navbar.appendChild(container_fluid);
         document.body.appendChild(navbar);
     }
-
-    get_shopcart_count();
+    if (localStorage.getItem("token") && localStorage.getItem("token") !== "undefined")
+    {
+        get_shopcart_count();
+    }
 }
 
 function get_shopcart_count()
 {
-    get_request("/back/routes/shopcart.php?query=get").onload = function ()
+    post_request("/back/routes/shopcart.php", {
+        "query": "get",
+        "token": localStorage.getItem("token")
+    }).onload = function ()
     {
-        console.log("test");
         console.log(this.responseText);
         let json = this.responseText;
         let list = JSON.parse(json);
         let cart_badge = document.getElementById("cart-badge");
         // get the length of the list
         let count = Object.keys(list).length;
+        cart_badge.innerHTML = count;
     }
 }
