@@ -103,7 +103,7 @@ export default function create_navbar()
         let span_navbar_nav_cart_badge = document.createElement("span");
         span_navbar_nav_cart_badge.classList.add("badge", "bg-secondary");
         span_navbar_nav_cart_badge.setAttribute("id", "cart-badge");
-        span_navbar_nav_cart_badge.innerHTML = "0";
+        // span_navbar_nav_cart_badge.innerHTML = "0";
         a_navbar_nav_cart.appendChild(span_navbar_nav_cart_badge);
 
         li_navbar_nav_cart.appendChild(a_navbar_nav_cart);
