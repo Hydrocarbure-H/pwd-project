@@ -31,7 +31,7 @@ function construct($db): void
             firstname VARCHAR(255) DEFAULT NULL,
             token VARCHAR(100) DEFAULT NULL,
             lastname VARCHAR(255) DEFAULT NULL,
-            address VARCHAR(255) DEFAULT NULL,
+            address VARCHAR(255) DEFAULT "30-32 Avenue de la République, 94800 Villejuif",
             account_type VARCHAR(255) DEFAULT NULL,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )');
