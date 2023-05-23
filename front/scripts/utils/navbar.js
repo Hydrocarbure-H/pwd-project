@@ -9,11 +9,13 @@ export default function get_shopcart_count()
     {
         let json = this.responseText;
         let response = JSON.parse(json);
+        let cart_badge = document.getElementById("cart-badge");
+
         if (response["message"] === "Shopcart empty.")
         {
+            cart_badge.innerHTML = 0;
             return;
         }
-        let cart_badge = document.getElementById("cart-badge");
         // get the length of the json list
         cart_badge.innerHTML = response.message.length;
     }
