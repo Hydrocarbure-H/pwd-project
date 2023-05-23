@@ -1,5 +1,5 @@
 import {get_request, post_request} from "../utils/requests.js";
-
+import get_shopcart_count from "../utils/navbar.js";
 /**
  * Create the navbar
  */
@@ -127,20 +127,5 @@ export default function create_navbar()
     if (localStorage.getItem("token") && localStorage.getItem("token") !== "undefined")
     {
         get_shopcart_count();
-    }
-}
-
-function get_shopcart_count()
-{
-    post_request("/back/routes/shopcart.php", JSON.stringify({
-        "query": "get",
-        "token": localStorage.getItem("token")
-    })).onload = function ()
-    {
-        let json = this.responseText;
-        let list = JSON.parse(json).message;
-        let cart_badge = document.getElementById("cart-badge");
-        // get the length of the json list
-        cart_badge.innerHTML = list.length;
     }
 }

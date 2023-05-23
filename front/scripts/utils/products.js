@@ -1,6 +1,7 @@
 import {add_product, remove_product} from "./shopcart.js";
 import display_message from "./errors.js";
 import {display_shopcart_dialog} from "./shopcart.js";
+import get_shopcart_count from "./navbar.js";
 
 /**
  * Display the products
@@ -107,6 +108,7 @@ export default function display_products(json, is_shopcart = false)
                 card_button.addEventListener("click", function ()
                 {
                     remove_product(products[i + k * 3]["id"]);
+                    get_shopcart_count();
                 });
             }
             else
@@ -114,6 +116,7 @@ export default function display_products(json, is_shopcart = false)
                 card_button.addEventListener("click", function ()
                 {
                     add_product(products[i + k * 3]["id"]);
+                    get_shopcart_count();
                 });
             }
         }
