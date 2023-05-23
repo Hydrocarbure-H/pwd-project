@@ -132,9 +132,11 @@ function get_shopcart_count()
 {
     get_request("/back/routes/shopcart.php?query=get").onload = function ()
     {
+        console.log(this.responseText);
         let json = this.responseText;
         let list = JSON.parse(json)["message"];
         let cart_badge = document.getElementById("cart-badge");
-        cart_badge.innerHTML = length(list);
+        // get the length of the list
+        let count = Object.keys(list).length;
     }
 }
