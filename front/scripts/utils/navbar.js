@@ -9,7 +9,7 @@ export default function get_shopcart_count()
     {
         let json = this.responseText;
         let response = JSON.parse(json);
-        if (response["code"] !== "200")
+        if (response["code"] !== 200)
         {
             return;
         }

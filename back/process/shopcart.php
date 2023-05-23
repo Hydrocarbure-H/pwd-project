@@ -255,7 +255,7 @@ function get($db): void
         $shopcart = $query->fetchAll(PDO::FETCH_ASSOC);
         if (!$shopcart)
         {
-            display_response("success", "Shopcart empty.", 204);
+            display_response("success", "Shopcart empty.", 200);
         }
 
         $products = [];
